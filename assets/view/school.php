@@ -67,11 +67,5 @@ if (!Session::has('edit-mode')) {
 
 <script>
   $(document).ready(() => {
-    $('button').click(
-      (course) => {
-        console.log(course.value);
-      }
-    );
-   
   });
 </script>

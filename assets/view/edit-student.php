@@ -8,7 +8,10 @@
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#personal-settings" role="tab" aria-controls="personal-settings" aria-selected="true">Personal Settings</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">Courses</a>
+    <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">Enrolled Courses</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="add-courses-tab" data-toggle="tab" href="#add-courses" role="tab" aria-controls="courses" aria-selected="false">Add Courses</a>
   </li>
   <li class="nav-item">
     <a class="nav-link bg-danger text-white" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="courses" aria-selected="false">Delete</a>
@@ -65,29 +68,39 @@
 
   <!-- courses tab -->
   <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
+  <div class="row">
+  <div class="col-xs-5">
   <h1>Enrolled Courses</h1>
+  </div>
+  <div class="col-xs-3 ml-auto my-auto mr-4">
+  <button class='btn btn-sm btn-warning'>Remove Selected</button>
+  </div>
+  </div>
   <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Course</th>
       <th scope="col">Description</th>
-      <th scope="col">Image</th>
-      <th scope="col">created</th>
-      <th scope="col">Last Updated</th>
+      <th scope="col">Remove</th>
     </tr>
   </thead>
   <tbody>
   <?php
-  foreach ($studentInfo->getCourseModelArray() as $index => $course) { 
+  foreach ($studentInfo->getCourseModelArray() as $course) { 
       ?>
     <tr>
-      <th scope="row"><?php echo $index ?></th>
-      <td><?php echo $course->course_name ?></td>
-      <td><?php echo $course->course_name ?></td>
-      <td><?php echo $course->course_name ?></td>
-      <td><?php echo $course->course_name ?></td>
-      <td><?php echo $course->course_name ?></td>
+      <td>
+      <div class="row">
+      <div class="col-12">
+      <?php echo $course->course_image ?>
+      </div>
+      <div class="col-12">
+      <?php echo $course->course_name ?>
+      </div>
+      </div>
+      </td>
+      <td><?php echo $course->course_description ?></td>
+      <td><input type="checkbox" class='form-control' name="courses[]" id=""></td>
     </tr>
 
     <?php 
@@ -109,6 +122,28 @@
   <!-- <p class='text-muted'>Student Courses: </p> -->
   </div>
   <div class="col-12">
+  </div>
+  <div class="col-12">
+  <label>Password
+  
+  <input type="text" class='form-control' placeholder='re-enter your password.' name="" id="">
+  </label>
+ 
+  </div>
+  <div class="col-12 text-left">
+  <button class='btn btn-sm btn-danger'>Delete</button>
+  </div>
+  </div>
+  </div>
+</div>
+
+  <div class="tab-pane fade" id="add-courses" role="tabpanel" aria-labelledby="add-courses-tab">
+  <div class="row">
+  <div class="col-12">
+  <h2>Add New Courses</h2>
+  </div>
+  <div class="col-12">
+    
   </div>
   <div class="col-12">
   <label>Password
