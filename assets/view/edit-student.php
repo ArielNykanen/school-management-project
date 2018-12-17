@@ -5,16 +5,16 @@
 <div class="col-12">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#personal-settings" role="tab" aria-controls="personal-settings" aria-selected="true">Personal Settings</a>
+    <a class="nav-link active text-dark" id="home-tab" data-toggle="tab" href="#personal-settings" role="tab" aria-controls="personal-settings" aria-selected="true">Personal Settings</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">Enrolled Courses</a>
+    <a class="nav-link text-dark" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">Enrolled Courses</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="add-courses-tab" data-toggle="tab" href="#add-courses" role="tab" aria-controls="courses" aria-selected="false">Add Courses</a>
+    <a class="nav-link text-dark" id="add-courses-tab" data-toggle="tab" href="#add-courses" role="tab" aria-controls="courses" aria-selected="false">Add Courses</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link bg-danger text-white" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="courses" aria-selected="false">Delete</a>
+    <a class="nav-link bg-danger text-white" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="courses" aria-selected="false">Delete Student</a>
   </li>
 </ul>
 
@@ -137,26 +137,6 @@
   </div>
 </div>
 
-  <div class="tab-pane fade" id="add-courses" role="tabpanel" aria-labelledby="add-courses-tab">
-  <div class="row">
-  <div class="col-12">
-  <h2>Add New Courses</h2>
-  </div>
-  <div class="col-12">
-    
-  </div>
-  <div class="col-12">
-  <label>Password
-  
-  <input type="text" class='form-control' placeholder='re-enter your password.' name="" id="">
-  </label>
- 
-  </div>
-  <div class="col-12 text-left">
-  <button class='btn btn-sm btn-danger'>Delete</button>
-  </div>
-  </div>
-  </div>
-</div>
+
 
 </div>
