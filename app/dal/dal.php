@@ -5,7 +5,7 @@ final class DataAccessLayer
 	private $host = '127.0.0.1';
 	private $db   = 'theschool';
 	private $user = 'root';
-	private $pass = '1212';
+	private $pass = '';
 	private $charset = 'utf8';
     private $dsn;
     private $opt = [

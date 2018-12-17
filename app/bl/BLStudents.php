@@ -2,24 +2,24 @@
     require_once 'BusinessLogic.php';
     require_once 'app/models/AdminsModel.php';
 
-class BLAdmins extends BusinessLogic {
+class BLStudents extends BusinessLogic {
 
   public function get()
   {
-      $query = 'SELECT * FROM `administrator`';
+      $query = 'SELECT * FROM `students`';
 
       $result = $this->dal->select($query);
       $resultsArray = [];
 
       while ($row = $result->fetch()) {
-          array_push($resultsArray, new UsersModel($row));
+          array_push($resultsArray, new StudentModel($row));
       }
       return $resultsArray;
   }
 
   public function getByEmail($email)
   {
-      $q = 'SELECT * FROM `administrator` WHERE admin_email=?';
+      $q = 'SELECT * FROM `students` WHERE student_email=?';
       
       $params = array(
           $email
@@ -29,28 +29,38 @@ class BLAdmins extends BusinessLogic {
       $resultsArray = [];
 
       while ($row = $results->fetch()) {
-          array_push($resultsArray, new AdminsModel($row));
+          array_push($resultsArray, new StudentModel($row));
       }
 
       return $resultsArray;
   }
 
-  public function getOne($id)
+  public function getOne($id, $loadSubModels = false)
   {
-    //todo make it get by array of name id or any other ways coalesce
-
-      $q = "SELECT * FROM `administrator` WHERE admin_id= :id";
-
-      $results = $this->dal->select($q, [
-          'id' => $id
+      $queryStudent = 'SELECT * FROM `students` WHERE student_id = :studentId';
+      $resultsStudent = $this->dal->select($queryStudent, [
+          'studentId' => $id
       ]);
-      $row = $results->fetch();
-      return new AdminsModel($row);
+      $row = $resultsStudent->fetch();
+      $student = new StudentModel($row);
+      if ($loadSubModels) {
+          $course = new BLCourses;
+          $queryCourse = 'SELECT * FROM `sc-connector` WHERE student_id = :studentId';
+          $enrolledResults = $this->dal->select($queryCourse, [
+              'studentId' => $id
+          ]);
+          
+          while ($row = $enrolledResults->fetch()) {
+              array_push($student->courseModelArray, $course->getOne($row['course_id']));
+          }
+      }
+      return $student;
   }
 
   public function set($a)
   {   
-      $query = "INSERT INTO `users`( `users_name`, `users_lastname`, `users_email`, `users_password`) VALUES (:un, :uln, :ue, :up)";
+      // todo make it for the student
+      $query = "INSERT INTO `students`( `users_name`, `users_lastname`, `users_email`, `users_password`) VALUES (:un, :uln, :ue, :up)";
 
       $params = array(
           "un" => $a->user_name,
@@ -67,6 +77,7 @@ class BLAdmins extends BusinessLogic {
   {
 
     //todo make it update by array of name id or any other ways coalesce
+      // todo make it for the student
 
       $query = "UPDATE `users` SET `users_name`=? WHERE `users_id`=?";
 
@@ -80,6 +91,8 @@ class BLAdmins extends BusinessLogic {
 
   public function delete($id)
   {
+      // todo make it for the student
+
       $query = "DELETE FROM `users` WHERE `users_id` = :ui";
 
       $params = array(

@@ -8,12 +8,12 @@ class Session {
       return $_SESSION[$name] = $value;
     }
 
-    throw new \Exception('Ma,e Amd Va;ie Reqiored');
+    // throw new \Exception('Ma,e Amd Va;ie Reqiored');
     
   }
 
   public static function get($name){
-    
+
     return $_SESSION[$name];
     
   }

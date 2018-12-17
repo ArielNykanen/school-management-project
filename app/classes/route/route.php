@@ -14,7 +14,7 @@ class Route {
   }
   
   if ($_GET['url'] === 'index.php') {
-    $function->__invoke('home');
+    $function->__invoke('school');
   } else {
     // if the current url is not in the array of urls it will direct user to not found page.
     $function->__invoke(self::$notFoundPage);

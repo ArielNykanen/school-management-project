@@ -1,7 +1,7 @@
 <?php
     require_once 'app/dal/dal.php';
 
- class BusinessLogic 
+ class BusinessLogic
 {
     protected $dal;
 
