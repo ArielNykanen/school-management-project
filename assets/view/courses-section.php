@@ -15,7 +15,7 @@
     <button name='course' type='submit' value='<?php echo $course->course_id ?>' class='btn btn-info course'>
       <div class="row">
         <div class="col-md-4">
-          <img style="width:100px; height:100px;" src="uploads/courses/<?php echo $course->course_image ?>" alt="course-image">
+          <img style="width:100px; height:100px;" src="..\uploads\courses\courses-cover-images\<?php echo $course->course_image ?>" alt="course-image">
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">

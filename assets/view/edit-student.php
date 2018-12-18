@@ -35,7 +35,7 @@
   <label>Image
 
   <div class="card" style="width: 10rem;">
-  <img class="card-img-top" style='max-width:200px; max-height:160px;' src="uploads\students\student1.png" alt="Card image cap">
+  <img class="card-img-top" style='max-width:200px; max-height:160px;' src="../uploads/profiles/images/student1.png" alt="Card image cap">
   <div class="card-body mx-auto">
   </div>
   </div>
