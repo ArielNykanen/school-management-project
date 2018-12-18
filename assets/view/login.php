@@ -53,7 +53,7 @@ if (isset($_POST['login-submit'])) {
       $(document).ready(() => {
         $('#email').focus(
           () => {
-            console.log("heyyyy");
+            console.log("from login page: make some validations using realtime js!!");
             
           }
         );

@@ -31,30 +31,30 @@ if (isset($_POST['edit-student'])) {
   // passes id of model to session
   Session::add('edit-mode', true);
   $selectedSudent = $cbl->getOne($_POST['edit-student']);
-  include 'assets/view/edit-student.php';
+  include 'edit-student.php';
 } 
 
 if (isset($_POST['edit-course'])) {
   // passes id of model to session
   Session::add('edit-mode', true);
   $selectedCourse = $cbl->getOne($_POST['edit-course']);
-  include 'assets/view/edit-course.php';
+  include 'edit-course.php';
 }
 
 if (!Session::has('edit-mode')) {
-  include 'assets/view/courses-section.php';
+  include 'courses-section.php';
 
 // <!-- Students Section -->
 
-  include 'assets/view/students-section.php';
+  include 'students-section.php';
 
 // <!-- display course content -->
 
-  include 'assets/view/selected-course.php';
+  include 'selected-course.php';
 
 // <!-- display student content -->
 
- include 'assets/view/selected-student.php'; 
+ include 'selected-student.php'; 
 } 
 
 
@@ -65,6 +65,10 @@ if (!Session::has('edit-mode')) {
 
 </form>
 
+
+
+
+<?php include 'footer.php'; ?> 
 <script>
   $(document).ready(() => {
   });

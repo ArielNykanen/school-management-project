@@ -1,6 +1,6 @@
 <?php
     require_once 'BusinessLogic.php';
-    require_once 'app/models/AdminsModel.php';
+    require_once '../app/models/AdminsModel.php';
 
 class BLStudents extends BusinessLogic {
 

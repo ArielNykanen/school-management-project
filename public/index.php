@@ -5,37 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base href="http://localhost/school-management-project/"> 
+    <base href="http://localhost/school-management-project/public/"> 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="public\css\main.css">
     <title>>>>23<<<</title>
 </head> 
-<body> 
-<?php require_once "assets/view/main-navbar.php" ?>
-<div class="container">
 
-  <?php
+<body> 
+  <div class="container">
+    <?php
+    require_once "../assets/view/main-navbar.php";
+      ?>
+    
+    <?php
 // create the routing system
-require_once "Routes.php";
 
 // will require the files automaticaly 
 
 function __autoload($class_name) {
-  if (file_exists("app/classes/route/".$class_name.".php")) {
-    require_once "app/classes/route/".$class_name.".php";
-  } else if (file_exists("app/controllers/".$class_name.".php")) { 
-    require_once "app/controllers/".$class_name.".php";
-  } else if (file_exists("app/bl/".$class_name.".php")) { 
-    require_once "app/bl/".$class_name.".php";
-  } else if (file_exists("app/models/".$class_name.".php")) {
-    require_once "app/models/".$class_name.".php";
-  } else if (file_exists("app/classes/session/".$class_name.".php")) {
-    require_once "app/classes/session/".$class_name.".php";
-  } else if (file_exists("app/classes/session/".$class_name.".php")) {
-    require_once "app/services/".$class_name.".php";
+  if (file_exists("../app/classes/route/".$class_name.".php")) {
+    require_once "../app/classes/route/".$class_name.".php";
+  } else if (file_exists("../app/controllers/".$class_name.".php")) { 
+    require_once "../app/controllers/".$class_name.".php";
+  } else if (file_exists("../app/bl/".$class_name.".php")) { 
+    require_once "../app/bl/".$class_name.".php";
+  } else if (file_exists("../app/models/".$class_name.".php")) {
+    require_once "../app/models/".$class_name.".php";
+  } else if (file_exists("../app/classes/session/".$class_name.".php")) {
+    require_once "../app/classes/session/".$class_name.".php";
+  } else if (file_exists("../app/classes/session/".$class_name.".php")) {
+    require_once "../app/services/".$class_name.".php";
   } 
 }
 
+require_once "../app/classes/route/Routes.php";
 ?>
 
 </div>

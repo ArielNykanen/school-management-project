@@ -1,6 +1,6 @@
 <?php
     require_once 'model.php';
-    require_once 'app/bl/BLAdmins.php';
+    require_once '../app/bl/BLAdmins.php';
 
 class UsersModel implements Imodel {
 

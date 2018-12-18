@@ -23,17 +23,19 @@
 <div class="tab-content" id="myTabContent">
   <!-- personal settings tab -->
   <div class="tab-pane fade show active" id="personal-settings" role="tabpanel" aria-labelledby="home-tab">
-  <h1>personal-settings</h1>
+  <div class="row text-center">
+  <div class="col-12">
+  <h1>personal settings</h1>
+  </div>
   <!-- name
   phone 
   email
   image -->
-  <div class="row">
-  <div class="col-12">
+  <div class="col-12 w-100">
   <label>Image
 
   <div class="card" style="width: 10rem;">
-  <img class="card-img-top w-25" src="..." alt="Card image cap">
+  <img class="card-img-top" style='max-width:200px; max-height:160px;' src="uploads\students\student1.png" alt="Card image cap">
   <div class="card-body mx-auto">
   </div>
   </div>

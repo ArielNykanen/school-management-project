@@ -1,5 +1,5 @@
 <?php
-    require_once 'app/dal/dal.php';
+    require_once '../app/dal/dal.php';
 
  class BusinessLogic
 {
