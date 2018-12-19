@@ -1,12 +1,13 @@
 <?php
-if(isset($_POST['student'])) {
-  $selectedStudent = $sbl->getOne($_POST['student']);
+foreach ($allStudents as $student) {
+  if (isset($_POST['student'. $student->student_id])) {
+  $selectedStudent = $sbl->getOne($_POST['student'.$student->student_id]);
 ?>
-  <div class="col-lg-4 order-1 order-lg-3"> 
+  <div class="col-md-12 col-lg-4 order-1 order-lg-3"> 
     <div class="card border-default mb-3" style="max-width: 18rem;">
   <div class="card-header bg-transparent border-default"><?php echo $selectedStudent->student_name ?></div>
   <div class="card-body text-default">
-  <img style='height:200px; max-height: 200px; width: 100%;' src="https://pixabay.com/get/e830b4072ce9002ad25a5840981318c3fe76e7d11cb1144392f7c1/book-15584_1920.jpg" alt="">
+  <img style='height:200px; max-height: 200px; width: 100%;' src="../uploads/profiles/images/students/<?php echo $student->student_image ?>" alt="">
     <h5 class="card-title">
     <?php
      echo $selectedStudent->student_name;
@@ -17,12 +18,13 @@ if(isset($_POST['student'])) {
   <div class="card-footer bg-transparent border-default">
   <div class="row">
   <div class="col-xs-5 mr-2">
-  <button name='edit-student' value='<?php echo $selectedStudent->student_id ?>' class='btn btn-warning'>Edit Student</button>
+  <button name='edit-student<?php echo $selectedStudent->student_id ?>' value='<?php echo $selectedStudent->student_id ?>' class='btn btn-warning'>Edit Student</button>
   </div> 
   </div>
   </div>
 </div>
   </div>
   <?php 
+  }
 }
 ?>

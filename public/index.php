@@ -17,7 +17,7 @@
     <?php
     require_once "../assets/view/main-navbar.php";
     ?>
-  <div class="container">
+  <div class="container-fluid">
     
     <?php
 // create the routing system

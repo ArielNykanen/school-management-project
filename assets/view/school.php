@@ -24,24 +24,29 @@ $allStudents = $sbl->get();
 <form action="" method="POST">
 
 <div class="row">
-
 <!-- courses Section -->
 <?php 
-if (isset($_POST['edit-student'])) {
+$editStudent = false;
+$editCourse = false;
+foreach ($allStudents as $student) {
+  if(isset($_POST['edit-student'.$student->student_id])) {
+    $editStudent = true;
+    $id = $_POST['edit-student'.$student->student_id];
+    $studentInfo = $sbl->getOne($id, true);
+    include 'edit-student.php';
+  }
+}
   // passes id of model to session
-  Session::add('edit-mode', true);
-  $selectedSudent = $cbl->getOne($_POST['edit-student']);
-  include 'edit-student.php';
-} 
-
-if (isset($_POST['edit-course'])) {
+  foreach ($allCourses as $course) {
+if (isset($_POST['edit-course'.$course->course_id])) {
+  $editCourse = true;
   // passes id of model to session
-  Session::add('edit-mode', true);
-  $selectedCourse = $cbl->getOne($_POST['edit-course']);
+  $selectedCourse = $course;
   include 'edit-course.php';
 }
+}
 
-if (!Session::has('edit-mode')) {
+if (!$editStudent && !$editCourse) {
   include 'courses-section.php';
 
 // <!-- Students Section -->

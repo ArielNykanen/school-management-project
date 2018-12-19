@@ -8,18 +8,20 @@ class CourseModel implements Imodel {
   private $course_name;
   private $course_description;
   private $course_image;
+  private $course_max_students;
   private $created_at;
   private $updated_at;
   public $studentModelArray;
-
+  
   public function __construct($arr) {
     if (!empty($arr['course_id']))
     $this->course_id = $arr['course_id'];
-
+    
     $this->studentModelArray = [];
     $this->course_name = $arr["course_name"];
     $this->course_description = $arr["course_description"];
     $this->course_image = $arr["course_image"];
+    $this->course_max_students = $arr["course_max_students"];
     $this->created_at = $arr["created_at"];
     $this->updated_at = $arr["updated_at"];
   
