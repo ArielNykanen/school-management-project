@@ -50,8 +50,8 @@ class CourseController extends Controller {
   }
 
   public static function checkIfHasStudents($courseId) {
-    $cbl = new BLCourse();
-    $cbl->getAllEnrolled();
+    $cbl = new BLCourses();
+    $cbl->getAllEnrolled($courseId);
   }
 }
 

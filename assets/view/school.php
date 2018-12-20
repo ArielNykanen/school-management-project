@@ -20,7 +20,7 @@ if (isset($_POST['delete-student'])) {
   } else if ($loggedAdmin[0]->admin_password === md5($_POST['admin-password'])) {
     StudentController::deleteAllStudentCourses($_POST['delete-student']);
     StudentController::deleteStudent($_POST['delete-student']);    
-  } else {
+   } else {
     return AlertService::createAlert('Wrong password!', '', 'danger');
   }
 
@@ -29,8 +29,11 @@ if (isset($_POST['delete-student'])) {
 
 // delete course 
 if (isset($_POST['delete-course'])) {
-  CourseController::checkIfHasStudents($_POST['delete-course']);
-  CourseController::deleteStudent($_POST['delete-course']);    
+  if(empty(CourseController::checkIfHasStudents($_POST['delete-course']))) {
+    var_dump(CourseController::checkIfHasStudents($_POST['delete-course']));
+  }
+  // todo make it work
+  // CourseController::deleteStudent($_POST['delete-course']);   
  }
 
 $allCourses = $cbl->get(); 

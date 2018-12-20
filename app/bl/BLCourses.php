@@ -99,14 +99,21 @@ class BLCourses extends BusinessLogic {
   }
 
   public function getAllEnrolled($courseId) {
-    $queryCourse = 'SELECT * FROM `sc-connector` WHERE course_id = :courseId';
-    $resultsCourse = $this->dal->select($queryCourse, [
-        'courseId' => $id
-    ]);
+    $queryCourse = 'SELECT * FROM `sc-connector` WHERE course_id = ?';
+   
+    $params = array(
+        $courseId
+    );
 
-    $row = $resultsCourse->fetch();
+    $results = $this->dal->select($queryCourse, $params);
+    $resultsArray = [];
 
-    var_dump($row);
+    while ($row = $results->fetch()) {
+        array_push($resultsArray, $row);
+    }
+
+    return $resultsArray;
+    
 }
 
 }
