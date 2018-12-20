@@ -14,7 +14,7 @@
     <button class='btn section-btn' name='student<?php echo $student->student_id ?>' value='<?php echo $student->student_id ?>'>
       <div class="row">
         <div class="col-md-4">
-          <img style="width:100px; height:100px;" src="../uploads/profiles/images/students/<?php echo $student->student_image ?>" alt="student-image">
+          <img style="width:100px; height:100px; border-radius:100px" src="../uploads/profiles/images/students/<?php echo $student->student_image ?>" alt="student-image">
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">

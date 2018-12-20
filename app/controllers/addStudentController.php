@@ -28,11 +28,25 @@ class AddStudentController extends Controller {
 
   public static function uploadStudent($studentDetailsArr) {
     $sbl = new BLStudents();
+    $imageFile = $studentDetailsArr['student_image'];
     $studentImage = new UploadFile();
-    $studentImage->setName($studentDetailsArr['student_image']);
-    $studentDetailsArr['student_image'] = $studentImage->getName();
-    $newStudent = new StudentModel($studentDetailsArr);
-    $sbl->set($newStudent);
+    $studentImage->setName($imageFile);
+    if(!$studentImage::fileSize($imageFile)) {
+      $path = '../uploads/profiles/images/students/';
+      if($studentImage->move($imageFile["tmp_name"], $path, $studentImage, $studentImage->getName())) {
+        $studentDetailsArr['student_image'] = $studentImage->getName();
+        $newStudent = new StudentModel($studentDetailsArr);
+        if($sbl->set($newStudent)) {
+          return AlertService::createAlert('Student Added Successfuly!', '', 'success');
+        } else {
+          return AlertService::createAlert('Something Went Wrong!', 'Adding student failed please try again.', 'danger');
+        }
+      } else {
+        return AlertService::createAlert('Something Went Wrong!', 'Image uploading failed please try again.', 'danger');
+      }
+    } else {
+      return AlertService::createAlert('Form Is Not Valid!', 'Image file is too large!', 'danger');
+    }
   }
   
 

@@ -2,7 +2,7 @@
 
 class UploadFile {
   protected $fileName;
-  protected $max_filesize = 2097152;
+  protected $max_filesize = 3000000;
   protected $extension;
   protected $path;
     /** 
@@ -51,11 +51,10 @@ class UploadFile {
     * @return bool
     */
     
-    public static function fileSize($file){
+    public static function fileSize($imageFile){
     
       $fileobj = new static;
-
-      return $file > $fileobj->max_filesize ? true : false;
+      return $imageFile['size'] > $fileobj->max_filesize ? true : false;
       
     }
 
@@ -97,8 +96,7 @@ class UploadFile {
       $fileObj = new static;
       $ds = DIRECTORY_SEPARATOR;
       
-      $fileObj->setName($file, $new_name);
-      $file_name = $fileObj->getName(); 
+      $fileName = $new_name;
 
       if (!is_dir($folder)) {
         mkdir($folder, 0777, true);
@@ -106,12 +104,13 @@ class UploadFile {
 
       $fileObj->path = "{$folder}{$ds}{$fileName}";
 
-      $absolute_path = BASE_PATH."{$ds}uploads{$ds}$fileObj->path";
+      $absolute_path = $fileObj->path;
       if(move_uploaded_file($temp_path, $absolute_path)) {
-        return $fileObj();
+        return true;
       }
 
-      return null;
+      return false;
+
     }
 
 }
