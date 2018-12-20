@@ -48,8 +48,6 @@ class AddStudentController extends Controller {
       return AlertService::createAlert('Form Is Not Valid!', 'Image file is too large!', 'danger');
     }
   }
-  
-
 }
 
 ?>

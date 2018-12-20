@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2018 at 02:03 PM
+-- Generation Time: Dec 20, 2018 at 01:08 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -43,8 +43,8 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`admin_id`, `admin_name`, `admin_role`, `admin_phone`, `admin_email`, `admin_image`, `admin_password`) VALUES
-(1, 'david', 1, '544444444', 'example1@any.any', '', 'a01610228fe998f515a72dd730294d87'),
-(2, 'shlomi', 2, '533333333', 'example2@any.any', '', 'a01610228fe998f515a72dd730294d87'),
+(1, 'Ariel Nykänen ', 1, '544444444', 'example1@any.any', 'f0799852-02af-11e9-967e-9c5c8ec2ccdf.jpg', 'a01610228fe998f515a72dd730294d87'),
+(2, 'shlomi', 2, '533333333', 'example2@any.any', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf.jpg', 'a01610228fe998f515a72dd730294d87'),
 (3, 'avraham', 3, '522222222', 'example3@any.any', '', 'a01610228fe998f515a72dd730294d87');
 
 -- --------------------------------------------------------
@@ -58,6 +58,7 @@ CREATE TABLE `courses` (
   `course_name` varchar(50) COLLATE utf8_bin NOT NULL,
   `course_description` text COLLATE utf8_bin NOT NULL,
   `course_image` varchar(500) COLLATE utf8_bin NOT NULL,
+  `course_max_students` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -67,11 +68,12 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`course_id`, `course_name`, `course_description`, `course_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Course-1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, esse exercitationem itaque fugit laborum consequuntur repellendus architecto dolores officia deleniti suscipit eligendi eos odit maxime ab natus libero mollitia tempora?', 'course1.jpg', '2018-11-28 22:00:00', '2018-11-05 22:00:00', NULL),
-(2, 'course-2', 'Description', 'image.jpg', '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
-(3, 'course-3', 'Description', 'image.jpg', '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
-(4, 'course-4', 'Description', 'image.jpg', '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL);
+INSERT INTO `courses` (`course_id`, `course_name`, `course_description`, `course_image`, `course_max_students`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Github', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, esse exercitationem itaque fugit laborum consequuntur repellendus architecto dolores officia deleniti suscipit eligendi eos odit maxime ab natus libero mollitia tempora?', 'f67bd295-02ae-11e9-967e-9c5c8ec2ccdf.jpg', 30, '2018-11-28 22:00:00', '2018-11-05 22:00:00', NULL),
+(2, 'Angular pro', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'c58715ad-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
+(3, 'Amazon', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'ec72ece4-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
+(4, 'Ebay', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'ec72f9d0-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
+(5, 'node', 'Learn node js...', 'ac9d4735-02e7-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-12-17 22:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`role_id`, `role_level`) VALUES
 (1, 'owner'),
 (2, 'manager'),
-(3, 'sales'),
+(3, 'sale'),
 (4, 'student');
 
 -- --------------------------------------------------------
@@ -111,7 +113,9 @@ CREATE TABLE `sc-connector` (
 
 INSERT INTO `sc-connector` (`student_id`, `course_id`) VALUES
 (1, 1),
-(1, 4);
+(1, 4),
+(3, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -132,8 +136,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `student_name`, `student_phone`, `student_email`, `student_image`) VALUES
-(1, 'avraham', '0505464534', 'avrahame@gmail.com', ''),
-(2, 'simha', '0506456454', 'simha@gmail.com', '');
+(1, 'avraham', '0505464534', 'avrahame@gmail.com', 'e35473c2-02e5-11e9-967e-9c5c8ec2ccdf.png'),
+(2, 'simha', '0506456454', 'simha@gmail.com', 'e3547f56-02e5-11e9-967e-9c5c8ec2ccdf.png'),
+(3, 'Reut hadad', '0546270000', 'siri@gmail.com', '2dd3ffb1-02e6-11e9-967e-9c5c8ec2ccdf.png');
 
 --
 -- Indexes for dumped tables
@@ -186,13 +191,13 @@ ALTER TABLE `administrator`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
