@@ -1,5 +1,6 @@
 #bg-img-school {
   position: fixed;
+  background-image: url('../images/backgrounds/bg-main-school.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
