@@ -23,10 +23,10 @@
 
 
   <!-- tabs content section -->
-<div class="tab-content" id="myTabContent">
+<div class="tab-content  col-12" id="myTabContent">
   <!-- personal settings tab -->
-<div class="tab-pane fade tabs-style " id="add-courses" role="tabpanel" aria-labelledby="home-tab">
-  <h1>Add Courses</h1>
+  <div class="tab-pane fade tabs-style " id="add-courses" role="tabpanel" aria-labelledby="home-tab">
+    <h1 class='m-0'>Add Courses</h1>
   <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -53,7 +53,6 @@
       <td><?php echo $course->course_description ?></td>
       <td><input type="checkbox" class='form-control' name="courses[]" id=""></td>
     </tr>
-
     <?php 
     }
     ?>
@@ -64,7 +63,7 @@
   <div class="tab-pane fade tabs-style show active in" id="personal-settings" role="tabpanel" aria-labelledby="home-tab">
   <div class="row text-center">
   <div class="col-12">
-  <h1>personal settings</h1>
+  <h1 class='m-0'>personal settings</h1>
   </div>
   <!-- name
   phone 
@@ -111,7 +110,7 @@
   <div class="tab-pane fade tabs-style" id="courses" role="tabpanel" aria-labelledby="courses-tab">
   <div class="row">
   <div class="col-xs-5">
-  <h1>Enrolled Courses</h1>
+  <h1 class='m-0'>Enrolled Courses</h1>
   </div>
   <div class="col-xs-3 ml-auto my-auto mr-4">
   <button class='btn btn-sm btn-warning'>Remove Selected</button>
@@ -154,7 +153,7 @@
   <!-- Delete Student tab -->
   <div class="tab-pane fade tabs-style text-center" id="delete" role="tabpanel" aria-labelledby="delete-tab">
   <div class="row">
-  <div class="col-12">
+  <div class="col-12 my-5">
   <h2>Delete Student</h2>
   <p class='text-muted'>Student Name: <?php echo $studentInfo->student_name ?></p>
   <p class='text-muted'>Student Phone: <?php echo $studentInfo->student_phone ?></p>

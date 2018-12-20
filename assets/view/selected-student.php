@@ -4,14 +4,14 @@ foreach ($allStudents as $student) {
   $selectedStudent = $sbl->getOne($_POST['student'.$student->student_id]);
 ?>
   <div class="col-md-12 col-lg-4 order-1 order-lg-3"> 
-    <div class="card border-default mb-3 bg-card text-center" style="max-width: 18rem;">
+    <div class="card border-default mb-3 bg-card text-center" style="width: 30rem;">
   <div class="card-header bg-dark border-default">
     <h4>
     Student Info
     </h4>
   </div>
   <div class="card-body text-default">
-  <img style='height:200px; max-height: 200px; width: 100%;' src="../uploads/profiles/images/students/<?php echo $student->student_image ?>" alt="">
+  <img style='height:200px; max-height: 200px; width: 50%;' src="../uploads/profiles/images/students/<?php echo $student->student_image ?>" alt="">
     <h5 class="card-title">
     </h5>
     <p class="card-text">Name: <?php echo $selectedStudent->student_name; ?></p>

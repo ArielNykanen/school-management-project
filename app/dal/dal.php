@@ -46,9 +46,8 @@ final class DataAccessLayer
     }
     public function insert($query, $params) {
         $pdo = new PDO($this->dsn, $this->user, $this->pass, $this->opt);
-        var_dump($params);
         $statement = $pdo->prepare($query);
-
+        
         $statement->execute($params);
     }
 

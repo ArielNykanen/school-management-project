@@ -57,18 +57,16 @@ class BLStudents extends BusinessLogic {
       return $student;
   }
 
-  public function set($a)
+  public function set($newStudent)
   {   
       // todo make it for the student
-      $query = "INSERT INTO `students`( `users_name`, `users_lastname`, `users_email`, `users_password`) VALUES (:un, :uln, :ue, :up)";
-
+      $query = "INSERT INTO `students`( `student_name`, `student_phone`, `student_email`, `student_image`) VALUES (:sn, :sp, :se, :si)";
       $params = array(
-          "un" => $a->user_name,
-          "uln" => $a->user_lastname,
-          "ue" => $a->user_email,
-          "up" => $a->user_password,
+          "sn" => $newStudent->student_name,
+          "sp" => $newStudent->student_phone,
+          "se" => $newStudent->student_email,
+          "si" => $newStudent->student_image,
       );
-
 
       $this->dal->insert($query, $params);
   }

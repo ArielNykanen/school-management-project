@@ -1,10 +1,10 @@
 
-<div class="col-md-4 col-lg-3 order-3 order-lg-2 bg-sections">
+<div class="col-md-5 col-lg-3 order-3 order-lg-2 bg-sections">
 <ul class="list-group">
 <li class="list-group-item d-flex justify-content-between align-items-center">
   <h4>Students</h4>
     <div  align=right>
-        <button class='btn btn-danger'>+</button>
+        <button name='add-student' class='btn btn-danger'>+</button>
     </div>
   </li>
   <?php foreach ($allStudents as $index => $student) {

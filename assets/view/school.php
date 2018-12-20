@@ -21,13 +21,15 @@ $allStudents = $sbl->get();
 
 
 
-<form action="" method="POST">
-
+<form action="" method="POST" enctype="multipart/form-data">
+ 
 <div class="row">
 <!-- courses Section -->
 <?php 
 $editStudent = false;
 $editCourse = false;
+
+// checks for click on buttons
 foreach ($allStudents as $student) {
   if(isset($_POST['edit-student'.$student->student_id])) {
     $editStudent = true;
@@ -36,14 +38,23 @@ foreach ($allStudents as $student) {
     include 'edit-student.php';
   }
 }
-  // passes id of model to session
+  // checks for click on buttons
   foreach ($allCourses as $course) {
 if (isset($_POST['edit-course'.$course->course_id])) {
   $editCourse = true;
-  // passes id of model to session
   $selectedCourse = $course;
   include 'edit-course.php';
 }
+}
+
+// add course
+if (isset($_POST['add-course'])) {
+  include 'add-course.php';
+}
+
+// add student
+if (isset($_POST['add-student'])) {
+include 'add-student.php';
 }
 
 if (!$editStudent && !$editCourse) {
@@ -70,10 +81,6 @@ if (!$editStudent && !$editCourse) {
 
 </form>
 
-
-
-
-<?php include 'footer.php'; ?> 
 <script>
   $(document).ready(() => {
   });
