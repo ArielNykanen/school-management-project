@@ -2,7 +2,7 @@
 require_once "controller.php";
 require_once "../app/classes/upload.php";
 
-class AddCourseController extends Controller {
+class CourseController extends Controller {
 
   public static function validateForm($courseDetails){
     $cbl = new BLCourses();
@@ -47,6 +47,11 @@ class AddCourseController extends Controller {
     } else {
       return AlertService::createAlert('Form Is Not Valid!', 'Image file is too large!', 'danger');
     }
+  }
+
+  public static function checkIfHasStudents($courseId) {
+    $cbl = new BLCourse();
+    $cbl->getAllEnrolled();
   }
 }
 

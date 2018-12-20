@@ -15,15 +15,15 @@
     ];
 
 
-    if(AddStudentController::validateForm($studentDetails)) {
-      AddStudentController::uploadStudent($studentDetails);
+    if(StudentController::validateForm($studentDetails)) {
+      StudentController::uploadStudent($studentDetails);
       
     }
 
   }
 ?>
   
-  <div class="col-lg-4 order-1 order-lg-3">
+  <div class="col-lg-3 order-1 order-lg-3">
         <div class="card border-default mb-3 bg-card text-center">
             <div class="card-header bg-dark border-default">
             <h4>

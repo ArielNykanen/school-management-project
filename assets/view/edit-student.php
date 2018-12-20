@@ -1,6 +1,4 @@
-<?php
-   
-?>
+
 <div class="row w-100">
   <div class="header-color col-12">
     <h1>Selected Student (<?php echo $studentInfo->student_name ?>)</h1>
@@ -100,7 +98,7 @@
   </div>
   
   <div class="col-12">
-  <button class='btn btn-sm btn-success'>Save Changes</button>
+  <button class='btn btn-sm btn-success my-4'>Save Changes</button>
   </div>
   </div>
   </div>
@@ -171,7 +169,7 @@
  
   </div>
   <div class="col-12 text-center">
-  <button class='btn btn-sm btn-danger'>Delete</button>
+  <button name='delete-student' value='<?php echo $studentInfo->student_id ?>' class='btn btn-sm btn-danger my-4'>Delete</button>
   </div>
   </div>
   </div>

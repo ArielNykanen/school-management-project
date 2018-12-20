@@ -125,7 +125,7 @@
   </label>
   </div>
   <div class="col-12 text-center">
-  <button class='btn btn-sm btn-danger m-4'>Delete</button>
+  <button class='btn btn-sm btn-danger my-4'>Delete</button>
   </div>
   </div>
   </div>

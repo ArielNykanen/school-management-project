@@ -87,17 +87,28 @@ class BLStudents extends BusinessLogic {
       $this->dal->update($query, $params);
   }
 
-  public function delete($id)
+  public function delete($studentId)
   {
       // todo make it for the student
 
-      $query = "DELETE FROM `users` WHERE `users_id` = :ui";
+      $query = "DELETE FROM `students` WHERE `student_id` = :si";
 
       $params = array(
-          "ui" => $id
+          "si" => $studentId
       );
 
       $this->dal->delete($query, $params);
+  }
+
+  public function deleteAllCourses($studentId) {
+
+    $query = "DELETE FROM `sc-connector` WHERE `student_id` = :si";
+
+    $params = array(
+        "si" => $studentId
+    );
+
+    $this->dal->delete($query, $params);
   }
 
 }

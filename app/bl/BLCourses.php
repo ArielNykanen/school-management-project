@@ -92,11 +92,22 @@ class BLCourses extends BusinessLogic {
       $query = "DELETE FROM `users` WHERE `users_id` = :ui";
 
       $params = array(
-          "ui" => $id
+          "ci" => $id
       );
 
       $this->dal->delete($query, $params);
   }
+
+  public function getAllEnrolled($courseId) {
+    $queryCourse = 'SELECT * FROM `sc-connector` WHERE course_id = :courseId';
+    $resultsCourse = $this->dal->select($queryCourse, [
+        'courseId' => $id
+    ]);
+
+    $row = $resultsCourse->fetch();
+
+    var_dump($row);
+}
 
 }
 

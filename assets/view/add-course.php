@@ -14,15 +14,15 @@
         'course_max_students' => $_POST['course-max-students'],
       ];
 
-    if (AddCourseController::validateForm($courseDetails)) {
-        AddCourseController::uploadCourse($courseDetails);
+    if (CourseController::validateForm($courseDetails)) {
+        CourseController::uploadCourse($courseDetails);
     }
   
   }
 
   ?>
   
-  <div class="col-lg-4 order-1 order-lg-3">
+  <div class="col-lg-3 order-1 order-lg-3">
         <div class="card border-default mb-3 bg-card text-center">
             <div class="card-header bg-dark border-default">
             <h4>

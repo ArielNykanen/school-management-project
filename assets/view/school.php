@@ -1,6 +1,18 @@
-
-
 <?php
+
+// delete student 
+if (isset($_POST['delete-student'])) {
+  StudentController::deleteAllStudentCourses($_POST['delete-student']);
+  StudentController::deleteStudent($_POST['delete-student']);    
+ }
+
+
+// delete course 
+if (isset($_POST['delete-course'])) {
+  CourseController::checkIfHasStudents($_POST['delete-course']);
+  CourseController::deleteStudent($_POST['delete-course']);    
+ }
+
 SchoolController::checkIfLogged();
 
 $adminDetails = Session::get('admin_logged');
@@ -29,6 +41,8 @@ $allStudents = $sbl->get();
 $editStudent = false;
 $editCourse = false;
 
+
+
 // checks for click on buttons
 foreach ($allStudents as $student) {
   if(isset($_POST['edit-student'.$student->student_id])) {
@@ -46,6 +60,8 @@ if (isset($_POST['edit-course'.$course->course_id])) {
   include 'edit-course.php';
 }
 }
+
+
 
 // add course
 if (isset($_POST['add-course'])) {

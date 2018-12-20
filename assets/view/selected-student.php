@@ -3,7 +3,7 @@ foreach ($allStudents as $student) {
   if (isset($_POST['student'. $student->student_id])) {
   $selectedStudent = $sbl->getOne($_POST['student'.$student->student_id]);
 ?>
-  <div class="col-md-12 col-lg-4 order-1 order-lg-3"> 
+  <div class="col-md-12 col-lg-3 order-1 order-lg-3"> 
     <div class="card border-default mb-3 bg-card text-center" style="width: 30rem;">
   <div class="card-header bg-dark border-default">
     <h4>
