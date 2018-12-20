@@ -5,7 +5,7 @@
 <!-- todo make the footer change when you open tabs -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <div class="footer bg-dark" id='footer'>
+    <div class="footer bg-dark m-2" id='footer'>
       <div class="container bg-default text-center">
         <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
         <a href='#'><i class="fa fa-github fa-3x fa-fw"></i></a>
