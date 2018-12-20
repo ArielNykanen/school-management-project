@@ -17,6 +17,7 @@
 
     if(AddStudentController::validateForm($studentDetails)) {
       AddStudentController::uploadStudent($studentDetails);
+      
     }
 
   }

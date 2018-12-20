@@ -1,4 +1,27 @@
 
+  <?php
+  if (
+    isset($_POST['add-course']) &&
+    isset($_POST['course-name']) &&
+    isset($_POST['course-description']) &&
+    isset($_FILES['course-image']) &&
+    isset($_POST['course-max-students'])) {
+  
+      $courseDetails = [
+        'course_name' => $_POST['course-name'],
+        'course_description' => $_POST['course-description'],
+        'course_image' => $_FILES['course-image'],
+        'course_max_students' => $_POST['course-max-students'],
+      ];
+
+    if (AddCourseController::validateForm($courseDetails)) {
+        AddCourseController::uploadCourse($courseDetails);
+    }
+  
+  }
+
+  ?>
+  
   <div class="col-lg-4 order-1 order-lg-3">
         <div class="card border-default mb-3 bg-card text-center">
             <div class="card-header bg-dark border-default">
@@ -12,7 +35,7 @@
             <div class="row">
               <div class="col-12">
                 <label>Course Name
-                  <input type="text" class='form-control'>
+                  <input name='course-name' type="text" class='form-control'>
                 </label>
               </div>
               <div class="col-12">
@@ -24,20 +47,20 @@
 
                 <label>Course Image
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile02">
+                    <input  name='course-image' type="file" class="custom-file-input" id="inputGroupFile02">
                     <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
                   </div>
                 </label>
                 <div class="col-12" align=center>
                   <label>Course Max Students
-                    <input type="number" class='form-control w-50 '>
+                    <input  name='course-max-students' type="number" class='form-control w-50 '>
                   </label>
                 </div>
             </div>
           </div>
           </div>
           <div class="card-footer bg-dark border-default">
-            <button class='btn btn-lg btn-success'>Add Course</button>
+            <button name='add-course' class='btn btn-lg btn-success'>Add Course</button>
           </div>
         </div>
       </div>

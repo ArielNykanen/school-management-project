@@ -57,15 +57,15 @@ class BLCourses extends BusinessLogic {
             return $course;
         }
 
-  public function set($a)
+  public function set($course)
   {   
-      $query = "INSERT INTO `users`( `users_name`, `users_lastname`, `users_email`, `users_password`) VALUES (:un, :uln, :ue, :up)";
+      $query = "INSERT INTO `courses`( `course_name`, `course_description`, `course_image`, `course_max_students`) VALUES (:un, :uln, :ue, :up)";
 
       $params = array(
-          "un" => $a->user_name,
-          "uln" => $a->user_lastname,
-          "ue" => $a->user_email,
-          "up" => $a->user_password,
+          "un" => $course->course_name,
+          "uln" => $course->course_description,
+          "ue" => $course->course_image,
+          "up" => $course->course_max_students,
       );
 
 

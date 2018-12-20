@@ -22,9 +22,7 @@ class CourseModel implements Imodel {
     $this->course_description = $arr["course_description"];
     $this->course_image = $arr["course_image"];
     $this->course_max_students = $arr["course_max_students"];
-    $this->created_at = $arr["created_at"];
-    $this->updated_at = $arr["updated_at"];
-  
+    
   }
 
   function getStudentModelArray() {

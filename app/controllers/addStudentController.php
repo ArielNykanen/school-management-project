@@ -6,14 +6,25 @@ class AddStudentController extends Controller {
 
 
   public static function validateForm($studentDetailsArr){
-  
+    $sbl = new BLStudents();
+    $allStudents = $sbl->get();
     foreach ($studentDetailsArr as $key => $detail) {
       if ($detail === '' || ctype_space($detail)) {
       $key = str_replace('_', ' ', $key);
       return AlertService::createAlert('Form Is Not Valid!',   $key  . ' field is required!', 'danger');
     }
-    
   }
+  
+  foreach ($allStudents as $student) {
+    if ($student->student_email === $studentDetailsArr['student_email']) {
+      return AlertService::createAlert('Email ' . $student->student_email . ' is already in use!', '', 'danger');
+    }
+    
+    if ($student->student_phone === $studentDetailsArr['student_phone']) {
+      return AlertService::createAlert('Phone number ' . $student->student_phone . ' is already in use!', '', 'danger');
+    }
+  }
+
   if (strlen($studentDetailsArr['student_phone']) < 9 || strlen($studentDetailsArr['student_phone']) > 10) {
     return AlertService::createAlert('Form Is Not Valid!', 'Phone number is invalid!', 'danger');
   }
@@ -36,11 +47,9 @@ class AddStudentController extends Controller {
       if($studentImage->move($imageFile["tmp_name"], $path, $studentImage, $studentImage->getName())) {
         $studentDetailsArr['student_image'] = $studentImage->getName();
         $newStudent = new StudentModel($studentDetailsArr);
-        if($sbl->set($newStudent)) {
-          return AlertService::createAlert('Student Added Successfuly!', '', 'success');
-        } else {
-          return AlertService::createAlert('Something Went Wrong!', 'Adding student failed please try again.', 'danger');
-        }
+        $sbl->set($newStudent);
+        $_POST = array();
+        header('Location: school');
       } else {
         return AlertService::createAlert('Something Went Wrong!', 'Image uploading failed please try again.', 'danger');
       }
