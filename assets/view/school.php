@@ -1,17 +1,5 @@
 <?php
 
-// delete student 
-if (isset($_POST['delete-student'])) {
-  StudentController::deleteAllStudentCourses($_POST['delete-student']);
-  StudentController::deleteStudent($_POST['delete-student']);    
- }
-
-
-// delete course 
-if (isset($_POST['delete-course'])) {
-  CourseController::checkIfHasStudents($_POST['delete-course']);
-  CourseController::deleteStudent($_POST['delete-course']);    
- }
 
 SchoolController::checkIfLogged();
 
@@ -25,8 +13,29 @@ $cbl = new BLCourses();
 $loggedAdmin = $abl->getByEmail($adminDetails['admin_email']);
 $loggedAdminRole = $loggedAdmin[0]->adminRole();
 
+// delete student 
+if (isset($_POST['delete-student'])) {
+  if (!isset($_POST['admin-password']) || ctype_space($_POST['admin-password'])) {
+    return AlertService::createAlert('You need to re-enter password to delete!', '', 'danger');
+  } else if ($loggedAdmin[0]->admin_password === md5($_POST['admin-password'])) {
+    StudentController::deleteAllStudentCourses($_POST['delete-student']);
+    StudentController::deleteStudent($_POST['delete-student']);    
+  } else {
+    return AlertService::createAlert('Wrong password!', '', 'danger');
+  }
+
+ }
+
+
+// delete course 
+if (isset($_POST['delete-course'])) {
+  CourseController::checkIfHasStudents($_POST['delete-course']);
+  CourseController::deleteStudent($_POST['delete-course']);    
+ }
+
 $allCourses = $cbl->get(); 
 $allStudents = $sbl->get();
+
 ?>
 
  <!-- options code -->
