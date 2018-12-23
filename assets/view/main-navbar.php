@@ -35,6 +35,12 @@ $loggedAdminRole = $loggedAdmin[0]->adminRole();
               <img id='admin-profile-pic' src="../uploads/profiles/images/admins/<?php echo $loggedAdminRole->role_level; ?>/<?php echo $loggedAdmin[0]->admin_image; ?>" alt="profile image">
             </div>
           </li>
+          <li class="nav-item text-white">
+          <a class='nav-link text-white' href="log-out">
+            Log Out
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+          </a>
+          </li>
         </ul>
   </div>
 </nav>

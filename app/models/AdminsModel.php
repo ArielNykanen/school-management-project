@@ -15,7 +15,7 @@ class AdminsModel implements Imodel {
 
   public function __construct($arr) {
     if (!empty($arr['admin_id']))
-    $this->flight_id = $arr['admin_id'];
+    $this->admin_id = $arr['admin_id'];
 
     $this->admin_name = $arr["admin_name"];
     $this->admin_role = $arr["admin_role"];
