@@ -20,10 +20,10 @@
         <div class="col-5 mr-2">
           <p><?php echo $course->course_name ?></p>
           <span>Enrolled</span>
-          <span class="badge badge-primary badge-pill">14</span>
+          <span class="badge badge-primary badge-pill"><?php echo CourseController::getAllEnrolled($course->course_id) ?></span>
           <br />
           <span>Places Left</span>
-          <span class="badge badge-primary badge-pill">16</span>
+          <span class="badge badge-primary badge-pill"><?php echo CourseController::getLeftPlaces($course->course_id) ?></span>
         </div>
       </div>
     </button>

@@ -49,9 +49,31 @@ class CourseController extends Controller {
     }
   }
 
+  public static function  getAllEnrolled($courseId){
+    $cbl = new BLCourses();
+    $enrolledStudents = $cbl->getAllEnrolled($courseId);
+    $courseDetails = $cbl->getOne($courseId);
+    return count($enrolledStudents);
+  }
+
+  public static function  getLeftPlaces($courseId){
+    $cbl = new BLCourses();
+    $enrolledStudents = $cbl->getAllEnrolled($courseId);
+    $courseDetails = $cbl->getOne($courseId);
+    return $courseDetails->course_max_students - count($enrolledStudents);
+  }
+  
+
+
   public static function checkIfHasStudents($courseId) {
     $cbl = new BLCourses();
-    $cbl->getAllEnrolled($courseId);
+    $result = $cbl->getAllEnrolled($courseId);
+    return $result;
+  }
+  
+  public static function deleteCourse($courseId){
+    $cbl = new BLCourses();
+    $cbl->delete($courseId);
   }
 }
 

@@ -21,7 +21,7 @@ if (isset($_POST['delete-student'])) {
     StudentController::deleteAllStudentCourses($_POST['delete-student']);
     StudentController::deleteStudent($_POST['delete-student']);    
    } else {
-    return AlertService::createAlert('Wrong password!', '', 'danger');
+    AlertService::createAlert('Wrong password!', 'Student was not deleted', 'danger');
   }
 
  }
@@ -29,12 +29,64 @@ if (isset($_POST['delete-student'])) {
 
 // delete course 
 if (isset($_POST['delete-course'])) {
-  if(empty(CourseController::checkIfHasStudents($_POST['delete-course']))) {
-    var_dump(CourseController::checkIfHasStudents($_POST['delete-course']));
+  if(!empty(CourseController::checkIfHasStudents($_POST['delete-course']))) {
+    AlertService::createAlert('You cannot delete course with students!', '', 'danger');
+  } else if ($loggedAdmin[0]->admin_password === md5($_POST['admin-password'])) {
+    CourseController::deleteCourse($_POST['delete-course']);
+  } else {
+    AlertService::createAlert('Wrong password!', 'Course was not deleted', 'danger');
   }
   // todo make it work
   // CourseController::deleteStudent($_POST['delete-course']);   
+}
+
+
+
+
+// add courses to selected student 
+if (isset($_POST['add-courses']) && isset($_POST['courses'])) {
+  $selectedCourses = $_POST['courses'];
+  $studentId = $_POST['add-courses'];
+  foreach ($selectedCourses as $courseId) {
+    StudentController::addCourse($studentId, $courseId);
+  }
  }
+
+
+ //remove courses from selected student
+
+ if (isset($_POST['remove-courses']) && isset($_POST['removed-courses'])) {
+  $coursesIdToRemoveArr =  $_POST['removed-courses'];
+  $studentId = $_POST['remove-courses'];
+  foreach ($coursesIdToRemoveArr as $courseId) {
+    StudentController::removeCourse($studentId, $courseId);
+  }
+ }
+
+ // todo update student personal details 
+
+ if (
+   isset($_POST['update-student']) && 
+   isset($_POST['student-name']) && 
+   isset($_POST['student-email']) && 
+   isset($_POST['student-phone'])
+   ) {
+   $student = $sbl->getOne($_POST['update-student']);
+   $studentDetails = [
+    'student_name' => $_POST['student-name'],
+    'student_phone' => $_POST['student-phone'],
+    'student_email' => $_POST['student-email'],
+    'student_image' => $_FILES['student-image'],     
+   ];
+   if ($student->student_email !== $_POST['student-email'] || $student->student_phone !== $_POST['student-phone']) {
+    StudentController::validateForm($studentDetails);
+  }
+ }
+
+
+
+
+
 
 $allCourses = $cbl->get(); 
 $allStudents = $sbl->get();

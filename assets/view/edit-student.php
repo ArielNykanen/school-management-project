@@ -18,8 +18,11 @@
     <a class="a nav-link bg-danger text-white" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="courses" aria-selected="false">Delete Student</a>
   </li>
 </ul>
+<?php
 
 
+  
+?>
   <!-- tabs content section -->
 <div class="tab-content  col-12" id="myTabContent">
   <!-- personal settings tab -->
@@ -30,11 +33,18 @@
     <tr>
       <th scope="col">Course</th>
       <th scope="col">Description</th>
-      <th scope="col">Remove</th>
+      <th scope="col">Enroll</th>
     </tr>
   </thead>
   <tbody>
   <?php
+  $allCourses = $cbl->get();
+  $studentEnrolled = $studentInfo->getCourseModelArray();
+  $notEnrolledCourses = array_udiff($allCourses, $studentEnrolled,
+  function ($obj_a, $obj_b) {
+    return $obj_a->course_id - $obj_b->course_id;
+  }
+);
   foreach ($studentInfo->getCourseModelArray() as $course) { 
       ?>
     <tr>
@@ -48,14 +58,53 @@
       </div>
       </div>
       </td>
-      <td><?php echo $course->course_description ?></td>
-      <td><input type="checkbox" class='form-control' name="courses[]" id=""></td>
+      <td><?php echo $course->course_description ?>
+      <div class="row">
+      <div class="col-2">
+      <h1 style='color:green'>Enrolled</h1>
+      </div>
+      <div class="col-3">
+        </div>
+      </div>
+    </td>
+    <td>
+        <img style='max-width:80px' src="../assets/images/statistics/check.png" alt="">
+      </td>
     </tr>
     <?php 
+    } 
+    foreach ($notEnrolledCourses as $course) {
+
+      ?>
+         <tr>
+      <td>
+      <div class="row">
+      <div class="col-12">
+      <img src="..\uploads\courses\courses-cover-images\<?php echo $course->course_image ?>" alt="">
+      </div>
+      <div class="col-12">
+      <?php echo $course->course_name ?>
+      </div>
+      </div>
+      </td>
+      <td><?php echo $course->course_description ?></td>
+      <td><input type="checkbox" class='form-control' value='<?php echo $course->course_id ?>' name="courses[]"></td>
+    </tr>
+
+     <?php 
     }
-    ?>
+     ?>
   </tbody>
 </table>
+<?php 
+if (!empty($notEnrolledCourses)) {
+?>
+<div align=right>
+  <button name='add-courses' value='<?php echo $studentInfo->student_id ?>' class='btn btn-lg btn-success'>Add Selected Courses</button>
+</div>
+<?php
+}
+?>
 </div>
 
   <div class="tab-pane fade tabs-style show active in" id="personal-settings" role="tabpanel" aria-labelledby="home-tab">
@@ -78,27 +127,33 @@
 
   </label>
   </div>
-  <div class="col-12">
-  <button class="btn btn-sm btn-default">Change Image</button>
+  <div class="col-12 ">
+  <label>Change Image
+            <div class="custom-file">
+                <input name='student-image' type="file" class="custom-file-input" value='..\uploads\profiles\images\students\defaultStudent.png' id="inputGroupFile02">
+                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
+            </div>
+            </label>
+
   </div>
   <div class="col-12">
   <label>Name
-  <input type="text" class='form-control' value='<?php echo $studentInfo->student_name ?>'>
+  <input name='student-name' type="text" class='form-control' value='<?php echo $studentInfo->student_name ?>'>
   </label>
   </div>
   <div class="col-12">
   <label>Phone
-  <input type="text" class='form-control' value='<?php echo $studentInfo->student_phone ?>'>
+  <input name='student-phone' type="text" class='form-control' value='<?php echo $studentInfo->student_phone ?>'>
   </label>
   </div>
   <div class="col-12">
   <label>Email
-  <input type="text" class='form-control' value='<?php echo $studentInfo->student_email ?>'>
+  <input name='student-email' type="text" class='form-control' value='<?php echo $studentInfo->student_email ?>'>
   </label>
   </div>
   
   <div class="col-12">
-  <button class='btn btn-sm btn-success my-4'>Save Changes</button>
+  <button name='update-student' value='<?php echo $studentInfo->student_id ?>' class='btn btn-sm btn-success my-4'>Save Changes</button>
   </div>
   </div>
   </div>
@@ -110,9 +165,7 @@
   <div class="col-xs-5">
   <h1 class='m-0'>Enrolled Courses</h1>
   </div>
-  <div class="col-xs-3 ml-auto my-auto mr-4">
-  <button class='btn btn-sm btn-warning'>Remove Selected</button>
-  </div>
+ 
   </div>
   <table class="table">
   <thead class="thead-dark">
@@ -138,7 +191,7 @@
       </div>
       </td>
       <td><?php echo $course->course_description ?></td>
-      <td><input type="checkbox" class='form-control' name="courses[]" id=""></td>
+      <td><input type="checkbox" class='form-control' name="removed-courses[]" value='<?php echo $course->course_id ?>'></td>
     </tr>
 
     <?php 
@@ -146,6 +199,15 @@
     ?>
   </tbody>
 </table>
+<?php
+if (!empty($studentInfo->getCourseModelArray())) {
+?>
+<div align=right>
+  <button name='remove-courses' value='<?php echo $studentInfo->student_id ?>' class='btn btn-lg btn-danger'>Remove Selected</button>
+  </div>
+  <?php
+}
+?>
   </div>
 
   <!-- Delete Student tab -->
@@ -169,7 +231,7 @@
  
   </div>
   <div class="col-12 text-center">
-  <button name='delete-student' value='<?php echo $studentInfo->student_id ?>' class='btn btn-sm btn-danger my-4'>Delete</button>
+  <button name='delete-student' value='<?php echo $studentInfo->student_id ?>' class='btn btn-sm btn-danger my-4'>Delete</div>
   </div>
   </div>
   </div>

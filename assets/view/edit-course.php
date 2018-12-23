@@ -121,7 +121,7 @@
   </div>
   <div class="col-12">
   <label>Password
-  <input type="password" class='form-control' placeholder='re-enter your password.'>
+  <input name='admin-password' type="password" class='form-control' placeholder='re-enter your password.'>
   </label>
   </div>
   <div class="col-12 text-center">

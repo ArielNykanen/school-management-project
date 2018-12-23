@@ -12,7 +12,7 @@ class BLAdmins extends BusinessLogic {
       $resultsArray = [];
 
       while ($row = $result->fetch()) {
-          array_push($resultsArray, new UsersModel($row));
+          array_push($resultsArray, new AdminsModel($row));
       }
       return $resultsArray;
   }
@@ -27,7 +27,7 @@ class BLAdmins extends BusinessLogic {
 
       $results = $this->dal->select($q, $params);
       $resultsArray = [];
-
+      
       while ($row = $results->fetch()) {
           array_push($resultsArray, new AdminsModel($row));
       }

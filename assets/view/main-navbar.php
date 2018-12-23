@@ -6,7 +6,6 @@ $abl = new BLAdmins();
 echo $logged['admin_email'];
 $loggedAdmin = $abl->getByEmail($adminDetails['admin_email']);
 $loggedAdminRole = $loggedAdmin[0]->adminRole();
-
 ?>
 <nav class="main-navbar navbar navbar-expand-md navbar-light bg-navbar">
 <a id="logo" class="navbar-brand" href="school">
@@ -19,9 +18,15 @@ $loggedAdminRole = $loggedAdmin[0]->adminRole();
       <li class="nav-item">
         <a class="nav-link text-white" href="school">School <span class="sr-only">(current)</span></a>
       </li>
+      <?php
+      if ($loggedAdmin[0]->admin_role < 3) {
+        ?>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Administration<span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="administration">Administration<span class="sr-only">(current)</span></a>
       </li>
+      <?php 
+      }
+      ?>
     </ul>
         <ul class='navbar-nav navbar-right'>
           <li class="nav-item ml-auto">

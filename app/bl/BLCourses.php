@@ -89,7 +89,7 @@ class BLCourses extends BusinessLogic {
 
   public function delete($id)
   {
-      $query = "DELETE FROM `users` WHERE `users_id` = :ui";
+      $query = "DELETE FROM `courses` WHERE `course_id` = :ci";
 
       $params = array(
           "ci" => $id
@@ -111,7 +111,6 @@ class BLCourses extends BusinessLogic {
     while ($row = $results->fetch()) {
         array_push($resultsArray, $row);
     }
-
     return $resultsArray;
     
 }

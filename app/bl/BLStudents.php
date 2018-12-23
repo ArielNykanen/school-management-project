@@ -111,6 +111,29 @@ class BLStudents extends BusinessLogic {
     $this->dal->delete($query, $params);
   }
 
+  public function deleteOneCourse($studetnId, $courseId){
+    $query = "DELETE FROM `sc-connector` WHERE `student_id` = :si AND `course_id` = :ci";
+
+    $params = array(
+        "si" => $studetnId,
+        "ci" => $courseId
+    );
+
+    $this->dal->delete($query, $params);
+  }
+
+  public function addCourse($studentId, $courseId){
+  
+    $query = "INSERT INTO `sc-connector`( `student_id`, `course_id`) VALUES (:si, :ci)";
+    $params = array(
+        "si" => $studentId,
+        "ci" => $courseId,
+    );
+
+    $this->dal->insert($query, $params);
+    
+  }
+
 }
 
 

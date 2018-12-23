@@ -4,8 +4,7 @@
   isset($_POST['add-student']) &&
   isset($_POST['student-name']) &&
   isset($_POST['student-phone']) &&
-  isset($_POST['student-email']) &&
-  isset($_FILES['student-image'])) {
+  isset($_POST['student-email'])) {
 
     $studentDetails = [
       'student_name' => $_POST['student-name'],
@@ -44,7 +43,7 @@
             </label>
             <label>Student Image
             <div class="custom-file">
-                <input name='student-image' type="file" class="custom-file-input" id="inputGroupFile02">
+                <input name='student-image' value='default-image' type="file" class="custom-file-input" id="inputGroupFile02">
                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
             </div>
             </label>

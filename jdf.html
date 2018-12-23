@@ -1,1 +1,14 @@
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!
+<tr>
+  <td>
+  <div class="row">
+  <div class="col-12">
+  <img src="..\uploads\courses\courses-cover-images\<?php echo $allCourses[$j]->course_image ?>" alt="">
+  </div>
+  <div class="col-12">
+  <?php echo $allCourses[$j]->course_name ?>
+  </div>
+  </div>
+  </td>
+  <td><?php echo $allCourses[$j]->course_description ?></td>
+  <td><input type="checkbox" class='form-control' name="courses[]" id=""></td>
+</tr>

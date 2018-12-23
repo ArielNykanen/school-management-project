@@ -3,7 +3,7 @@
 class Route {
   private static $mainPage = 'index.php';
   private static $notFoundPage = 'not-found';
-  public static $validRoutes = array('login', 'school');
+  public static $validRoutes = array('login', 'school', 'administration');
 
   public static function set($route, $function){
     foreach (self::$validRoutes as $route) {

@@ -28,7 +28,7 @@ class StudentController extends Controller {
   if (strlen($studentDetailsArr['student_phone']) < 9 || strlen($studentDetailsArr['student_phone']) > 10) {
     return AlertService::createAlert('Form Is Not Valid!', 'Phone number is invalid!', 'danger');
   }
-  
+    
   if (!UploadFile::isImage($studentDetailsArr['student_image'])) {
     return AlertService::createAlert('Form Is Not Valid!', 'Upload only image files!', 'danger');
   }
@@ -36,6 +36,16 @@ class StudentController extends Controller {
   return true;
 
   }
+
+  // public static function validateUpdateForm($formDetails){
+  //   foreach ($formDetails as $key => $detail) {
+  //     if ($detail === '' || ctype_space($detail)) {
+  //     $key = str_replace('_', ' ', $key);
+  //     return AlertService::createAlert('Form Is Not Valid!',   $key  . ' field is required! cannot be empty.', 'danger');
+  //   }
+  // }
+  //   return true;
+  // }
 
   public static function uploadStudent($studentDetailsArr) {
     $sbl = new BLStudents();
@@ -67,6 +77,19 @@ class StudentController extends Controller {
   public static function deleteAllStudentCourses($studentId) {
     $sbl = new BLStudents();
     $sbl->deleteAllCourses($studentId);
+  }
+  
+  
+  public static function addCourse($studentId, $courseId) {
+    $sbl = new BLStudents();
+    $sbl->addCourse($studentId, $courseId);
+  }
+
+  public static function removeCourse($studentId, $courseId){
+  
+    $sbl = new BLStudents();
+    $sbl->deleteOneCourse($studentId, $courseId);
+    
   }
 
 
