@@ -8,13 +8,12 @@ $loggedAdmin = $abl->getByEmail($adminDetails['admin_email']);
 $loggedAdminRole = $loggedAdmin[0]->adminRole();
 ?>
 <nav class="main-navbar navbar navbar-expand-md navbar-light bg-navbar">
-<a id="logo" class="navbar-brand" href="school">
-</a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ">
+    <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link text-white" href="school">School <span class="sr-only">(current)</span></a>
       </li>
@@ -29,7 +28,7 @@ $loggedAdminRole = $loggedAdmin[0]->adminRole();
       ?>
     </ul>
         <ul class='navbar-nav navbar-right'>
-          <li class="nav-item ml-auto">
+          <li class="nav-item">
             <div class="text-white">
               <span class='mr-4'><?php echo $loggedAdmin[0]->admin_name; ?>. <?php echo $loggedAdminRole->role_level ?></span>
               <img id='admin-profile-pic' src="../uploads/profiles/images/admins/<?php echo $loggedAdminRole->role_level; ?>/<?php echo $loggedAdmin[0]->admin_image; ?>" alt="profile image">

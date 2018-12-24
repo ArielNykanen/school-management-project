@@ -72,16 +72,17 @@ class BLCourses extends BusinessLogic {
       $this->dal->insert($query, $params);
   }
 
-  public function update($a)
+  public function update($course)
   {
-
     //todo make it update by array of name id or any other ways coalesce
-
-      $query = "UPDATE `users` SET `users_name`=? WHERE `users_id`=?";
+      $id = $course->course_id;
+      $query = "UPDATE `courses` SET `course_name` =?, `course_description` =?, `course_image` =?, `course_max_students` =? WHERE `course_id`= $id";
 
       $params = array(
-          $a->getUserName(),
-          $a->getUserId()
+      $course->course_name,
+      $course->course_description,
+      $course->course_image,
+      $course->course_max_students,
       );
 
       $this->dal->update($query, $params);

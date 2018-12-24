@@ -9,7 +9,6 @@
     </div>
   </li>
   <?php foreach ($allCourses as $index => $course) {
-    
   ?>  
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <button name='course<?php echo $course->course_id ?>' type='submit' value='<?php echo $course->course_id ?>' class='btn section-btn'>
@@ -20,10 +19,32 @@
         <div class="col-5 mr-2">
           <p><?php echo $course->course_name ?></p>
           <span>Enrolled</span>
-          <span class="badge badge-primary badge-pill"><?php echo CourseController::getAllEnrolled($course->course_id) ?></span>
+          <?php
+    if (CourseController::getLeftPlaces($course->course_id)  > 0) {
+?>
+          <span class="badge badge-primary badge-pill"><?php
+          $enNum = CourseController::getAllEnrolled($course->course_id);
+          echo count($enNum->getStudentModelArray())
+          ?></span>
           <br />
           <span>Places Left</span>
-          <span class="badge badge-primary badge-pill"><?php echo CourseController::getLeftPlaces($course->course_id) ?></span>
+          <span class="badge badge-primary badge-pill text-success"><?php echo CourseController::getLeftPlaces($course->course_id) ?></span>
+          <?php
+    } else {
+      ?>
+       <span class="badge badge-primary badge-pill"><?php
+          $enNum = CourseController::getAllEnrolled($course->course_id);
+          echo count($enNum->getStudentModelArray())
+          ?></span>
+          <br />
+          <span>Places Left</span>
+          <span class="badge badge-primary badge-pill text-danger"><?php echo CourseController::getLeftPlaces($course->course_id) ?></span>
+          <p>
+          <span class="badge badge-primary badge-pill text-danger">Course Is Full</span>
+          </p>
+      <?php
+    }
+    ?>
         </div>
       </div>
     </button>

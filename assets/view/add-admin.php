@@ -26,7 +26,7 @@
         <div class="card border-default mb-3 bg-card text-center">
             <div class="card-header bg-dark border-default">
             <h4>
-              Add New Student
+              Add New Admin
             </h4>
             </div>
 
@@ -36,16 +36,19 @@
             <img width="160px" height="120px" src="../uploads/profiles/images/students/defaultStudent.png" alt='Image Preview' id="imagePre" />
         </div>
             </h5>
-            <label>Student Name
+            <label>Admin Name
               <input name='student-name' type="text" class='form-control'>
             </label>
-            <label>Student Phone
+            <label>Admin Phone
                 <input name='student-phone' type="text" class='form-control'>
             </label>
-            <label>Student Email
+            <label>Admin Email
                 <input name='student-email' type="text" class='form-control'>
             </label>
-            <label>Student Image
+            <label>Admin Role
+                <input name='student-email' type="text" class='form-control'>
+            </label>
+            <label>Admin Image
             <div class="custom-file">
                 <input name='student-image' onchange="readURL(this);" value='default-image' type="file" class="custom-file-input" id="inputGroupFile02">
                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>

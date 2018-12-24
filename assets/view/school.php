@@ -36,8 +36,16 @@ if (isset($_POST['delete-course'])) {
   } else {
     AlertService::createAlert('Wrong password!', 'Course was not deleted', 'danger');
   }
-  // todo make it work
-  // CourseController::deleteStudent($_POST['delete-course']);   
+}
+
+//remove students dir from course
+
+if (isset($_POST['r-s-s']) && isset($_POST['s-s'])) {
+  $courseId = $_POST['r-s-s'];
+  $selectedStudentIdArr = $_POST['s-s'];
+  foreach ($selectedStudentIdArr as $studentId) {
+    StudentController::removeCourse($studentId, $courseId);
+  }
 }
 
 
@@ -63,8 +71,7 @@ if (isset($_POST['add-courses']) && isset($_POST['courses'])) {
   }
  }
 
- // todo update student personal details 
-
+ // update student
  if (
    isset($_POST['update-student']) && 
    isset($_POST['student-name']) && 
@@ -72,16 +79,44 @@ if (isset($_POST['add-courses']) && isset($_POST['courses'])) {
    isset($_POST['student-phone'])
    ) {
    $student = $sbl->getOne($_POST['update-student']);
+   $updatedImage = $_FILES['student-image']['name'] !== '' ? $_FILES['student-image'] : $student->student_image;
    $studentDetails = [
     'student_name' => $_POST['student-name'],
     'student_phone' => $_POST['student-phone'],
     'student_email' => $_POST['student-email'],
-    'student_image' => $_FILES['student-image'],     
+    'student_image' => $updatedImage,     
    ];
-   if ($student->student_email !== $_POST['student-email'] || $student->student_phone !== $_POST['student-phone']) {
-    StudentController::validateForm($studentDetails);
-  }
+
+   StudentController::validateForm($studentDetails, $student->student_id);
+    
  }
+
+
+
+ //update course
+
+ if (
+   isset($_POST['save-course']) &&
+    isset($_POST['course-name']) &&
+    isset($_POST['course-description']) &&
+    isset($_FILES['course-image']) &&
+    isset($_POST['max-enroll'])
+ ) {
+  $course = $cbl->getOne($_POST['save-course']);
+  $updatedImage = $_FILES['course-image']['name'] !== '' ? $_FILES['course-image'] : $course->course_image;
+
+  $courseDetails = [
+    'course_id' => $_POST['save-course'],
+    'course_name' => $_POST['course-name'],
+    'course_description' => $_POST['course-description'],
+    'course_image' => $updatedImage,
+    'course_max_students' => $_POST['max-enroll'],
+  ];
+
+  CourseController::validateForm($courseDetails, $course->course_id);
+
+ }
+
 
 
 

@@ -27,11 +27,9 @@
   }
   };
   setFooter();
-  $(document).click(function() {
-    setTimeout(() => {
+
+    setInterval(() => {
     setFooter();
-    }, 150);
-  });
-  
-  });
+    }, 200);
+    });
 </script>

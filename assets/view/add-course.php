@@ -31,7 +31,11 @@
             </div>
 
             <div class="card-body text-default">
-            <h5 class="card-title"></h5>
+            <h5 class="card-title">
+            <div id="preview">
+            <img width="160px" height="120px" src="../assets/images/statistics/defaultImagePL.png" alt='Image Preview' id="imagePre" />
+        </div>
+            </h5>
             <div class="row">
               <div class="col-12">
                 <label>Course Name
@@ -47,7 +51,7 @@
 
                 <label>Course Image
                   <div class="custom-file">
-                    <input  name='course-image' type="file" class="custom-file-input" id="inputGroupFile02">
+                    <input  name='course-image' onchange="readURL(this);" type="file" class="custom-file-input" id="inputGroupFile02">
                     <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
                   </div>
                 </label>
@@ -65,3 +69,15 @@
         </div>
       </div>
       
+      <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imagePre').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>

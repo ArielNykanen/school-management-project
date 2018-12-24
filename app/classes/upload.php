@@ -40,7 +40,6 @@ class UploadFile {
     */
 
     public function fileExtension($file) {
-    
       return $this->extention = pathinfo($file["type"]);
       
     }

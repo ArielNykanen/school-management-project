@@ -16,7 +16,6 @@
   background-image: url('../images/logo/logo1.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: aliceblue;
 }
 .main-navbar #admin-profile-pic {
   width: 60px;
@@ -74,4 +73,7 @@
 .tabs-style img {
   max-width: 200px;
   max-width: 160px;
+}
+.nav-item a {
+  color: #ffffff;
 }

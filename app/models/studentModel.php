@@ -34,7 +34,7 @@ function __get($data){
 }
 
 function __set($data, $data2){
-
+  $this->$data = $data2;
 }
 
 

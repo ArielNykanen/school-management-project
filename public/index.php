@@ -16,10 +16,10 @@ session_start();
   </head> 
   <div id="bg-img-school">
 </div>
-  <body> 
     <?php
     require_once "../assets/view/main-navbar.php";
     ?>
+  <body> 
   <div class="container-fluid">
     
     <?php

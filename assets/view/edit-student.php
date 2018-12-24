@@ -74,7 +74,7 @@
     <?php 
     } 
     foreach ($notEnrolledCourses as $course) {
-
+      if (CourseController::getLeftPlaces($course->course_id)  > 0) {
       ?>
          <tr>
       <td>
@@ -90,8 +90,25 @@
       <td><?php echo $course->course_description ?></td>
       <td><input type="checkbox" class='form-control' value='<?php echo $course->course_id ?>' name="courses[]"></td>
     </tr>
-
      <?php 
+    } else {
+      ?>
+      <tr>
+      <td>
+      <div class="row">
+      <div class="col-12">
+      <img src="..\uploads\courses\courses-cover-images\<?php echo $course->course_image ?>" alt="">
+      </div>
+      <div class="col-12">
+      <?php echo $course->course_name ?>
+      </div>
+      </div>
+      </td>
+      <td><?php echo $course->course_description ?></td>
+      <td class='text-danger'> <h3> <i class="fa fa-lock" aria-hidden="true"></i>  Course Is Full</h3></td>
+    </tr>
+      <?php
+    }
     }
      ?>
   </tbody>
@@ -120,7 +137,7 @@ if (!empty($notEnrolledCourses)) {
   <label>Image
 
   <div class="card" style="width: 10rem;">
-  <img class="card-img-top" style='max-width:200px; max-height:160px;' src="../uploads/profiles/images/students/<?php echo $studentInfo->student_image ?>" alt="Card image cap">
+  <img class="card-img-top" id='imagePre' style='max-width:200px; max-height:160px;' src="../uploads/profiles/images/students/<?php echo $studentInfo->student_image ?>" alt="Card image cap">
   <div class="card-body mx-auto">
   </div>
   </div>
@@ -130,7 +147,7 @@ if (!empty($notEnrolledCourses)) {
   <div class="col-12 ">
   <label>Change Image
             <div class="custom-file">
-                <input name='student-image' type="file" class="custom-file-input" value='..\uploads\profiles\images\students\defaultStudent.png' id="inputGroupFile02">
+                <input name='student-image' onchange="readURL(this);" type="file" class="custom-file-input" id="inputGroupFile02"> 
                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
             </div>
             </label>
@@ -237,13 +254,15 @@ if (!empty($studentInfo->getCourseModelArray())) {
   </div>
 </div>
 </div>
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-<script>
-
-$(document).ready(() => {
-  
-  // $('#personal-settings').addClass('');
-
-});
-
-</script>
+                reader.onload = function (e) {
+                    $('#imagePre').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>

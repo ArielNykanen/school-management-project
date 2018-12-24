@@ -71,19 +71,17 @@ class BLStudents extends BusinessLogic {
       $this->dal->insert($query, $params);
   }
 
-  public function update($a)
-  {
-
-    //todo make it update by array of name id or any other ways coalesce
-      // todo make it for the student
-
-      $query = "UPDATE `users` SET `users_name`=? WHERE `users_id`=?";
+  public function update($a) {
+    $id = $a->student_id;
+      $query = "UPDATE `students` SET `student_name`= ?,`student_phone`= ?,`student_email`= ?, `student_image`= ? WHERE student_id = $id";
 
       $params = array(
-          $a->getUserName(),
-          $a->getUserId()
+          $a->student_name,
+          $a->student_phone,
+          $a->student_email,
+          $a->student_image,
+          
       );
-
       $this->dal->update($query, $params);
   }
 
@@ -99,6 +97,7 @@ class BLStudents extends BusinessLogic {
 
       $this->dal->delete($query, $params);
   }
+  
 
   public function deleteAllCourses($studentId) {
 
