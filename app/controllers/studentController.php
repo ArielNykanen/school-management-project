@@ -29,8 +29,10 @@ class StudentController extends Controller {
       }
     }
       
-      
-  
+    if (!filter_var($studentDetailsArr['student_email'], FILTER_VALIDATE_EMAIL)) {
+      return AlertService::createAlert('Form Is Not Valid!',   $studentDetailsArr['student_email']  . ' email is not valid.', 'danger');
+    }
+
         if (!isset($existingStudent)) {
        if(StudentController::checkNewValues($allStudents, $studentDetailsArr)) {
         if(StudentController::checkAndMoveFile()) {
