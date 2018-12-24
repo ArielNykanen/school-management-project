@@ -1,30 +1,4 @@
-<?php
 
-  if (
-  isset($_POST['add-admin']) &&
-  isset($_POST['admin-name']) &&
-  isset($_POST['admin-phone']) &&
-  isset($_POST['admin-email']) &&
-  isset($_POST['admin-password']) &&
-  isset($_POST['admin-role'])
-  ) {
-    
-    $adminDetails = [
-      'admin_name' => $_POST['admin-name'],
-      'admin_phone' => $_POST['admin-phone'],
-      'admin_email' => $_POST['admin-email'],
-      'admin_password' => $_POST['admin-password'],
-      'admin_role' => $_POST['admin-role'],
-      'admin_image' => $_FILES['admin-image'],
-    ];
-
-
-    if(AdminController::validateForm($adminDetails)) {
-      // AdminController::uploadStudent($adminDetails);
-    }
-
-  }
-?>
   <form action="" method="POST" enctype="multipart/form-data">
     <div class="col-lg-3 order-1 order-lg-3">
       <div class="card border-default mb-3 bg-card text-center">
@@ -60,11 +34,11 @@
                 foreach ($allRoles as $role) {
                   if ($loggedAdmin[0]->admin_role < 2 && $role->role_id < 2 && $role->role_id < 4) {
                     ?>
-              <option value="<?php echo $role->$role_id ?>"><?php echo $role->role_level ?></option>
+              <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
               <?php
               } else if ($loggedAdmin[0]->admin_role >= 1 && $role->role_id > 1 && $role->role_id < 4) {
               ?>
-              <option value="<?php echo $role->$role_id ?>"><?php echo $role->role_level ?></option>
+              <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
               <?php
               }
               }

@@ -36,11 +36,12 @@ class AdminController extends Controller {
         if (!isset($existingAdmin)) {
        if(AdminController::checkNewValues($allAdmins, $adminDetailsArr)) {
         if(AdminController::checkAndMoveFile()) {
+          AdminController::hashPassword();
           return true;
         }
        }
   } else {
-    $adminDetailsArr['admin_id'] = $studentId;
+    $adminDetailsArr['admin_id'] = $adminId;
     $updatedStudent = new StudentModel($adminDetailsArr);
       if(AdminController::checkUpdatedVlues($allAdmins, $adminDetailsArr, $existingAdmin)) {
         if ($existingAdmin->admin_image !== $adminDetailsArr['admin_image']) {
@@ -53,6 +54,11 @@ class AdminController extends Controller {
         }
       }
     }
+}
+
+
+public function hashPassword(){
+  AdminController::$adminDetails['admin_password'] = md5(AdminController::$adminDetails['admin_password']); 
 }
 
 public static function checkNewValues($allAdmins, $adminDetailsArr){
@@ -90,21 +96,22 @@ return true;
 
 
   public function checkAndMoveFile(){
+    $tempAdmin = new AdminsModel(AdminController::$adminDetails);
     if (AdminController::$defaultImage) {
       return true;
     } else {
-      $file = AdminController::$adminDetails['student_image'];
-      $studentImage = new UploadFile();
-      $studentImage->setName($file);
-      if(!$studentImage::fileSize($file)) {
-          $path = '../uploads/profiles/images/students/';
-          if(!$studentImage->move($file["tmp_name"], $path, $studentImage, $studentImage->getName())) {
+      $file = AdminController::$adminDetails['admin_image'];
+      $adminImage = new UploadFile();
+      $adminImage->setName($file);
+      if(!$adminImage::fileSize($file)) {
+          $path = '../uploads/profiles/images/admins/'.$tempAdmin->adminRole()->role_level . '/';
+          if(!$adminImage->move($file["tmp_name"], $path, $adminImage, $adminImage->getName())) {
               return AlertService::createAlert('Something Went Wrong!', 'Image uploading failed please try again.', 'danger');
             } 
           } else {
             return AlertService::createAlert('Form Is Not Valid!', 'Image file is too large!', 'danger');
           }
-          AdminController::$adminDetails['student_image'] = $studentImage->getName();
+          AdminController::$adminDetails['admin_image'] = $adminImage->getName();
           }
             return true;
   }
@@ -139,32 +146,30 @@ return true;
   
   
   public static function uploadAdmin($adminDetailsArr) {
-    $sbl = new BLStudents();
-    $newStudent = new StudentModel(AdminController::$adminDetails);
+    $abl = new BLAdmins();
+    $newAdmin = new AdminsModel(AdminController::$adminDetails);
     AdminController::$adminDetails = null;
-    $sbl->set($newStudent);
-    $_POST = array();
-    header('Location: school');
-    
+    $abl->set($newAdmin);
+    $_POST = array('');
+    header('location:administration');
   }
 
   public static function updateAdmin($updatedStudent){
-    $sbl = new BLStudents();
+    $abl = new BLAdmins();
     
     $updatedStudent->student_image = AdminController::$studentImage;  
-      $sbl->update($updatedStudent);
+      $abl->update($updatedStudent);
       AdminController::$studentImage = '';
       $_POST = array();
-      header('Location: school');
   }
 
 
   public static function deleteStudent($studentId) {
-    $sbl = new BLStudents();
-    $deletedStudent = $sbl->getOne($studentId);
+    $abl = new BLAdmins();
+    $deletedStudent = $abl->getOne($studentId);
     $deletedStudentImage = "../uploads/profiles/images/students/".$deletedStudent->student_image;
     if (unlink($deletedStudentImage)) {
-      $sbl->delete($studentId);
+      $abl->delete($studentId);
       } else {
       return AlertService::createAlert('Something went wrong try again', '', 'danger');
       }

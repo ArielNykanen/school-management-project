@@ -48,20 +48,22 @@ class BLAdmins extends BusinessLogic {
       return new AdminsModel($row);
   }
 
-  public function set($a)
+  public function set($admin)
   {   
-      $query = "INSERT INTO `users`( `users_name`, `users_lastname`, `users_email`, `users_password`) VALUES (:un, :uln, :ue, :up)";
+      $query = "INSERT INTO `administrator`( `admin_name`, `admin_role`, `admin_phone`, `admin_email`, `admin_image`, `admin_password`) VALUES (:an, :ar, :aph, :ae, :ai, :ap)";
 
       $params = array(
-          "un" => $a->user_name,
-          "uln" => $a->user_lastname,
-          "ue" => $a->user_email,
-          "up" => $a->user_password,
+          "an" => $admin->admin_name,
+          "ar" => $admin->admin_role,
+          "aph" => $admin->admin_phone,
+          "ae" => $admin->admin_email,
+          "ai" => $admin->admin_image,
+          "ap" => $admin->admin_password,
       );
 
-
       $this->dal->insert($query, $params);
-  }
+
+  } 
 
   public function update($a)
   {
