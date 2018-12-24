@@ -65,17 +65,18 @@ class BLAdmins extends BusinessLogic {
 
   } 
 
-  public function update($a)
-  {
+  public function update($admin) {
+    $id = $admin->admin_id;
+    $query = "UPDATE `administrator` SET `admin_name`= ?,`admin_role`= ?,`admin_phone`= ?,`admin_email`= ?,`admin_image`= ?,`admin_password`= ? WHERE admin_id = $id";
 
-    //todo make it update by array of name id or any other ways coalesce
-
-      $query = "UPDATE `users` SET `users_name`=? WHERE `users_id`=?";
-
-      $params = array(
-          $a->getUserName(),
-          $a->getUserId()
-      );
+    $params = array(
+      $admin->admin_name,
+      $admin->admin_role,
+      $admin->admin_phone,
+      $admin->admin_email,
+      $admin->admin_image,
+      $admin->admin_password,
+    );
 
       $this->dal->update($query, $params);
   }

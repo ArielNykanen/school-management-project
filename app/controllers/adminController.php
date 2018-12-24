@@ -41,16 +41,28 @@ class AdminController extends Controller {
         }
        }
   } else {
+    AdminController::$adminDetails['admin_role'] = AdminController::$adminDetails['admin_role'][0];
     $adminDetailsArr['admin_id'] = $adminId;
-    $updatedStudent = new StudentModel($adminDetailsArr);
       if(AdminController::checkUpdatedVlues($allAdmins, $adminDetailsArr, $existingAdmin)) {
-        if ($existingAdmin->admin_image !== $adminDetailsArr['admin_image']) {
+        if ($existingAdmin->admin_image !== AdminController::$adminDetails['admin_image']) {
           if(AdminController::checkAndMoveFile()) {
-            AdminController::updateStudent($updatedStudent);
+            $oldImage = '../uploads/profiles/images/admins/'. $existingAdmin->adminRole()->role_level . '/' . $existingAdmin->admin_image;
+            if (unlink($oldImage)) {
+                AdminController::updateAdmin();
+            } else {
+            return AlertService::createAlert('Something went wrong with changing the image!', 'Please try again', 'danger');
+            }
           } 
+        } else if ($existingAdmin->admin_role !== AdminController::$adminDetails['admin_role'][0]) {
+          $rbl = new BLRoles();
+          $newRole = $rbl->getOne(AdminController::$adminDetails['admin_role'][0]);
+          $image =  AdminController::$adminDetails['admin_image'];
+          rename('../uploads/profiles/images/admins/'. $existingAdmin->adminRole()->role_level . '/' .$image, '../uploads/profiles/images/admins/'. $newRole->role_level . '/' .$image);
+          AdminController::$adminDetails['admin_image'] = $existingAdmin->admin_image;
+          AdminController::updateAdmin();
         } else {
           AdminController::$adminDetails['admin_image'] = $existingAdmin->admin_image;
-          AdminController::updateStudent($updatedStudent);
+          AdminController::updateAdmin();
         }
       }
     }
@@ -119,26 +131,28 @@ return true;
 
   
 public static function checkUpdatedVlues($allAdmins, $adminDetailsArr, $existingAdmin){
-  foreach ($allAdmins as $key => $student) {
+  foreach ($allAdmins as $key => $admin) {
     # code...
-  if ($existingAdmin->student_email !== $admin->admin_email && $admin->admin_email === $adminDetailsArr['student_email']) {
+  if ($existingAdmin->admin_email !== $admin->admin_email && $admin->admin_email === $adminDetailsArr['admin_email']) {
     return AlertService::createAlert('Email ' . $admin->admin_email . ' is already in use!', '', 'danger');
   }
   
-  if ($existingAdmin->student_phone !== $admin->admin_phone && $admin->admin_phone === $adminDetailsArr['student_phone']) {
+  if ($existingAdmin->admin_phone !== $admin->admin_phone && $admin->admin_phone === $adminDetailsArr['admin_phone']) {
     return AlertService::createAlert('Phone number ' . $admin->admin_phone . ' is already in use!', '', 'danger');
 }
 
-if (strlen($adminDetailsArr['student_phone']) < 9 || strlen($adminDetailsArr['student_phone']) > 10) {
+if (strlen($adminDetailsArr['admin_phone']) < 9 || strlen($adminDetailsArr['admin_phone']) > 10) {
   return AlertService::createAlert('Form Is Not Valid!', 'Phone number is invalid!', 'danger');
 }
 
-if ($existingAdmin->student_image !== $adminDetailsArr['student_image']) {
-  if ( !UploadFile::isImage($adminDetailsArr['student_image'])) {
+if ($adminDetailsArr['admin_image']['name'] !== '') {
+  if ( !UploadFile::isImage($adminDetailsArr['admin_image'])) {
     return AlertService::createAlert('Form Is Not Valid!', 'Upload only image files!', 'danger');
-  }
-
-} 
+  } 
+} else {
+  AdminController::$defaultImage = true;
+  AdminController::$adminDetails['admin_image'] = $existingAdmin->admin_image; 
+}
 }
 return true;
 }
@@ -154,22 +168,20 @@ return true;
     header('location:administration');
   }
 
-  public static function updateAdmin($updatedStudent){
+  public static function updateAdmin(){
+    $updatedAdmin = new AdminsModel(AdminController::$adminDetails);
     $abl = new BLAdmins();
-    
-    $updatedStudent->student_image = AdminController::$studentImage;  
-      $abl->update($updatedStudent);
-      AdminController::$studentImage = '';
-      $_POST = array();
+    $abl->update($updatedAdmin);
+    $_POST = array();
   }
 
 
-  public static function deleteStudent($studentId) {
+  public static function deleteStudent($adminId) {
     $abl = new BLAdmins();
-    $deletedStudent = $abl->getOne($studentId);
+    $deletedStudent = $abl->getOne($adminId);
     $deletedStudentImage = "../uploads/profiles/images/students/".$deletedStudent->student_image;
     if (unlink($deletedStudentImage)) {
-      $abl->delete($studentId);
+      $abl->delete($adminId);
       } else {
       return AlertService::createAlert('Something went wrong try again', '', 'danger');
       }

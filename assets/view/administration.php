@@ -25,6 +25,32 @@ isset($_POST['admin-role'])
 
 }
 
+if (
+  isset($_POST['save-edit']) &&
+  isset($_POST['admin-name']) &&
+  isset($_POST['admin-phone']) &&
+  isset($_POST['admin-email']) &&
+  isset($_POST['admin-password']) &&
+  isset($_POST['admin-role'])
+  ) {
+    
+    $adminDetails = [
+      'admin_id' => $_POST['save-edit'],
+      'admin_name' => $_POST['admin-name'],
+      'admin_phone' => $_POST['admin-phone'],
+      'admin_email' => $_POST['admin-email'],
+      'admin_password' => $_POST['admin-password'],
+      'admin_role' => $_POST['admin-role'],
+      'admin_image' => $_FILES['admin-image'],
+    ];
+  
+  
+    if(AdminController::validateForm($adminDetails, $adminDetails['admin_id'])) {
+      // AdminController::uploadAdmin($adminDetails);
+    }
+  
+  }
+
 
 $abl = new BLAdmins();
 $allAdmins = $abl->get();
@@ -122,16 +148,17 @@ foreach ($allAdmins as $admin) {
 
 }
 
-if (isset($_POST['add-admin'])) {
-  include_once "add-admin.php";
-  }
-
-  foreach ($allAdmins as $admin) {
-  if (isset($_POST['edit-admin'.$admin->admin_id])) {
-    $editAdmin = $abl->getOne($_POST['edit-admin'.$admin->admin_id]);
-    include_once "edit-admin.php";
-  }
-  }
 ?>
 </form>
-
+<?php
+    if (isset($_POST['add-admin'])) {
+      include_once "add-admin.php";
+      }
+    
+      foreach ($allAdmins as $admin) {
+      if (isset($_POST['edit-admin'.$admin->admin_id])) {
+        $editAdmin = $abl->getOne($_POST['edit-admin'.$admin->admin_id]);
+        include_once "edit-admin.php";
+      }
+      }
+?>
