@@ -37,13 +37,13 @@
         </div>
             </h5>
             <label>Student Name
-              <input name='student-name' type="text" class='form-control'>
+              <input name='student-name' type="text" class='form-control add-validation'>
             </label>
-            <label>Student Phone
-                <input name='student-phone' type="text" class='form-control'>
+            <label>Student Phone <span id='phoneWarn'></span>
+                <input id="phone" name='student-phone' type="text" class='form-control add-validation'>
             </label>
-            <label>Student Email
-                <input name='student-email' type="text" class='form-control'>
+            <label>Student Email <span id='emailWarn'></span>
+                <input id='email' name='student-email' type="text" class='form-control add-validation'>
             </label>
             <label>Student Image
             <div class="custom-file">
@@ -53,11 +53,73 @@
             </label>
           </div>
           <div class="card-footer bg-dark border-default">
-            <button name='add-student' class='btn btn-lg btn-success'>Add Student</button>
+            <button name='add-student' id='add-student' class='btn btn-lg btn-success' disabled>Add Student</button>
           </div>
         </div>
       </div>
+      <?php
+      $allStudentsArr = $sbl->get();
+      $allStudentNumbers = [];
+      $allStudentEmails = [];
+
+      foreach ($allStudentsArr as $student) {
+        array_push($allStudentNumbers, $student->student_phone);
+        array_push($allStudentEmails, $student->student_email);
+      }
+      ?>
       <script type="text/javascript">
+      const numbersArr = <?php echo json_encode($allStudentNumbers); ?>;
+      const emailArr = <?php echo json_encode($allStudentEmails); ?>;
+
+      $(document).ready(() => {
+        const numInput = $('#phone');
+        const emailInput = $('#email');
+        $('#phone').keyup((key) => { 
+          numbersArr.forEach(number => {
+            if(number === numInput.val()) {
+              numInput.css('border', '1px solid red');
+              $('#phoneWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
+            } else if (numInput.val().length < 9 || numInput.val().length > 10) {
+              $('#phoneWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
+              numInput.css('border', '1px solid red');
+            } else if (!Number(numInput.val())) {
+              $('#phoneWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
+              numInput.css('border', '1px solid red');
+            } else {
+              $('#phoneWarn').html('<i class="fa fa-check" aria-hidden="true"></i>').css('color', 'green');
+              numInput.css('border', '1px solid green');
+            }
+          });
+        });
+        $('#email').keyup((key) => { 
+          emailRegx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          emailArr.forEach(email => {
+            if (email === emailInput.val()) {
+              $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i> In Use').css('color', 'red', 'position', 'absulute');
+            } else if (!emailRegx.test(emailInput.val()))  {
+              $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
+              emailInput.css('border', '1px solid red');
+            } else {
+              $('#emailWarn').html('<i class="fa fa-check" aria-hidden="true"></i>').css('color', 'green');
+              emailInput.css('border', '1px solid green');
+            }
+          });
+        });
+
+        $('input.add-validation').keyup(() => {
+          invalid = 0;
+          $('input.add-validation').each(function() {
+            if ($(this).val() === '') {
+              $('#add-student').attr("disabled", true);
+              invalid += 1;
+            } 
+            if (invalid <= 0) {
+              $('#add-student').attr("disabled", false);
+            }
+          }); 
+        })
+      });
+      
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

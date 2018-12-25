@@ -34,7 +34,7 @@ class StudentController extends Controller {
     }
 
         if (!isset($existingStudent)) {
-       if(StudentController::checkNewValues($allStudents, $studentDetailsArr)) {
+       if(StudentController::checkNewValues($allStudents)) {
         if(StudentController::checkAndMoveFile()) {
           return true;
         }
@@ -55,37 +55,29 @@ class StudentController extends Controller {
     }
 }
 
-public static function checkNewValues($allStudents, $studentDetailsArr){
+public static function checkNewValues($allStudents) {
+  $studentDetailsArr = StudentController::$studentDetails;
   foreach ($allStudents as $student) {
-
+    if ($student->student_phone === $studentDetailsArr['student_phone']) {
+    return AlertService::createAlert('Phone number ' . $student->student_phone . ' is already in use!', '', 'danger');
+    }
+    if (strlen($studentDetailsArr['student_phone']) < 9 || strlen($studentDetailsArr['student_phone']) > 10) {
+      return AlertService::createAlert('Form Is Not Valid!', 'Phone number is invalid!', 'danger');
+      }
   if ($student->student_email === $studentDetailsArr['student_email']) {
     return AlertService::createAlert('Email ' . $student->student_email . ' is already in use!', '', 'danger');
   }
-  
-  if ($student->student_phone === $studentDetailsArr['student_phone']) {
-    return AlertService::createAlert('Phone number ' . $student->student_phone . ' is already in use!', '', 'danger');
-}
 
-if (strlen($studentDetailsArr['student_phone']) < 9 || strlen($studentDetailsArr['student_phone']) > 10) {
-return AlertService::createAlert('Form Is Not Valid!', 'Phone number is invalid!', 'danger');
-}
-
-if (StudentController::$defaultImage) {
-  return true;
-}
-
-if ($studentDetailsArr['student_image']['name'] === '') {
-  return AlertService::createAlert('Form Is Not Valid!', 'You didnt chose image!', 'danger');
-}
-if (!UploadFile::isImage($studentDetailsArr['student_image'])) {
-return AlertService::createAlert('Form Is Not Valid!', 'Upload only image files!', 'danger');
+  if (!StudentController::$defaultImage && $studentDetailsArr['student_image']['name'] === '') {
+    return AlertService::createAlert('Form Is Not Valid!', 'You didnt chose image!', 'danger');
+  }
+  if (!StudentController::$defaultImage && !UploadFile::isImage($studentDetailsArr['student_image'])) {
+    return AlertService::createAlert('Form Is Not Valid!', 'Upload only image files!', 'danger');
 } 
 
 
-
 }
-return true;
-  
+  return true;
 }
 
 
@@ -113,7 +105,6 @@ return true;
   
 public static function checkUpdatedVlues($allStudents, $studentDetailsArr, $existingStudent){
   foreach ($allStudents as $key => $student) {
-    # code...
   if ($existingStudent->student_email !== $student->student_email && $student->student_email === $studentDetailsArr['student_email']) {
     return AlertService::createAlert('Email ' . $student->student_email . ' is already in use!', '', 'danger');
   }
