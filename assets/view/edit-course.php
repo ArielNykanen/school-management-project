@@ -136,7 +136,7 @@ if ($loggedAdmin[0]->admin_role < 2) {
   <!-- todo make it fetch the number of students in -->
   </div>
   <?php
-  if (!is_array(CourseController::getAllEnrolled($selectedCourse->course_id)->getStudentModelArray())) {
+  if (!CourseController::getAllEnrolled($selectedCourse->course_id)->getStudentModelArray()) {
   ?>
   <div class="col-12">
   <label>Password

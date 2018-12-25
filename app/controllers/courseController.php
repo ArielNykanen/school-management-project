@@ -39,7 +39,7 @@ class CourseController extends Controller {
       if (!UploadFile::isImage($courseDetails['course_image'])) {
         return AlertService::createAlert('Upload only Images!', '', 'danger');
       } else {
-        $oldImage = 'C:/xampp/htdocs/school-management-project/uploads/courses/courses-cover-images/'. $editableCourse->course_image;
+        $oldImage = '../uploads/courses/courses-cover-images/'. $editableCourse->course_image;
         if (unlink($oldImage)) {
           if(CourseController::checkAndMoveFile($courseDetails['course_image'])) {
             CourseController::updateCourse();
