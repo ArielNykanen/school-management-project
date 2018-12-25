@@ -93,15 +93,22 @@
         });
         $('#email').keyup((key) => { 
           emailRegx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          
+          invalid = 0;
           emailArr.forEach(email => {
-            if (email === emailInput.val()) {
-              $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i> In Use').css('color', 'red', 'position', 'absulute');
+            if (email == emailInput.val()) {
+              invalid += 1;
+              $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i> In Use').css('color', 'red');
             } else if (!emailRegx.test(emailInput.val()))  {
+              invalid += 1;
               $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
               emailInput.css('border', '1px solid red');
+            } else if (invalid > 0) {
+              $('#emailWarn').html('<i class="fa fa-times-circle" aria-hidden="true"></i>').css('color', 'red');
             } else {
               $('#emailWarn').html('<i class="fa fa-check" aria-hidden="true"></i>').css('color', 'green');
               emailInput.css('border', '1px solid green');
+
             }
           });
         });

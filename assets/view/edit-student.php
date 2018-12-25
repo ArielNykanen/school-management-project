@@ -28,7 +28,7 @@
   <!-- personal settings tab -->
   <div class="tab-pane fade tabs-style " id="add-courses" role="tabpanel" aria-labelledby="home-tab">
     <h1 class='m-0'>Add Courses</h1>
-  <table class="table">
+  <table class="table d-block-md d-sm-none">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Course</th>

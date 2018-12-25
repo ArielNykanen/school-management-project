@@ -24,7 +24,9 @@
     <input name='admin-email' class="text-dark form-control" value="<?php echo $editAdmin->admin_email; ?>">
     <label>Password</label>
     <input name='admin-password' class="text-dark form-control" placeholder='re-enter password to save'>
-
+    <?php 
+    if ($loggedAdmin[0]->admin_role > 1) {
+    ?>
     <label>Change Role</label>
     <select class='form-control' name="admin-role[]" id="">
     <?php
@@ -44,6 +46,9 @@
       }
     ?>
     </select>
+    <?php
+    }
+    ?>
   </div>
   <div class="card-footer bg-dark border-default">
   <div class="mr-2 text-center">
@@ -53,6 +58,7 @@
 </div>
   </div>
   </form>
+
   <script type="text/javascript">
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -64,4 +70,4 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
+  </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2018 at 01:08 PM
+-- Generation Time: Dec 25, 2018 at 04:25 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -44,8 +44,8 @@ CREATE TABLE `administrator` (
 
 INSERT INTO `administrator` (`admin_id`, `admin_name`, `admin_role`, `admin_phone`, `admin_email`, `admin_image`, `admin_password`) VALUES
 (1, 'Ariel Nykänen ', 1, '544444444', 'example1@any.any', 'f0799852-02af-11e9-967e-9c5c8ec2ccdf.jpg', 'a01610228fe998f515a72dd730294d87'),
-(2, 'shlomi', 2, '533333333', 'example2@any.any', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf.jpg', 'a01610228fe998f515a72dd730294d87'),
-(3, 'avraham', 3, '522222222', 'example3@any.any', '', 'a01610228fe998f515a72dd730294d87');
+(40, 'David Goldman', 2, '0544444444', 'example2@any.any', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf-9443efa5130a8f5ca07ef3f5f0b9a830-da70d9d6dbd16cb4b8714360b20c514a.jpeg', 'a01610228fe998f515a72dd730294d87'),
+(41, 'sales man', 3, '0577777777', 'example3@any.any', 'e978b247-0679-11e9-967e-9c5c8ec2ccdf-771761aac41f072ae9c80cc0542ef9ab.png', '1212');
 
 -- --------------------------------------------------------
 
@@ -69,9 +69,9 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_description`, `course_image`, `course_max_students`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Github', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, esse exercitationem itaque fugit laborum consequuntur repellendus architecto dolores officia deleniti suscipit eligendi eos odit maxime ab natus libero mollitia tempora?', 'f67bd295-02ae-11e9-967e-9c5c8ec2ccdf.jpg', 30, '2018-11-28 22:00:00', '2018-11-05 22:00:00', NULL),
+(1, 'Github', '              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, esse exercitationem itaque fugit laborum consequuntur repellendus architecto dolores officia deleniti suscipit eligendi eos odit maxime ab natus libero mollitia tempora?              ', 'f67bd295-02ae-11e9-967e-9c5c8ec2ccdf-2914fd7341fc6c434cbfaad7e64d6395.jpeg', 30, '2018-11-28 22:00:00', '2018-11-05 22:00:00', NULL),
 (2, 'Angular pro', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'c58715ad-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
-(3, 'Amazon', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'ec72ece4-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
+(3, 'Amazon', '  Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!  ', 'ec72ece4-02e8-11e9-967e-9c5c8ec2ccdf.png', 2, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
 (4, 'Ebay', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'ec72f9d0-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
 (5, 'node', 'Learn node js...', 'ac9d4735-02e7-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-12-17 22:00:00', NULL, NULL);
 
@@ -93,8 +93,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`role_id`, `role_level`) VALUES
 (1, 'owner'),
 (2, 'manager'),
-(3, 'sale'),
-(4, 'student');
+(3, 'sale');
 
 -- --------------------------------------------------------
 
@@ -112,10 +111,8 @@ CREATE TABLE `sc-connector` (
 --
 
 INSERT INTO `sc-connector` (`student_id`, `course_id`) VALUES
-(1, 1),
-(1, 4),
-(3, 2),
-(3, 3);
+(70, 3),
+(71, 3);
 
 -- --------------------------------------------------------
 
@@ -136,9 +133,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `student_name`, `student_phone`, `student_email`, `student_image`) VALUES
-(1, 'avraham', '0505464534', 'avrahame@gmail.com', 'e35473c2-02e5-11e9-967e-9c5c8ec2ccdf.png'),
-(2, 'simha', '0506456454', 'simha@gmail.com', 'e3547f56-02e5-11e9-967e-9c5c8ec2ccdf.png'),
-(3, 'Reut hadad', '0546270000', 'siri@gmail.com', '2dd3ffb1-02e6-11e9-967e-9c5c8ec2ccdf.png');
+(70, 'student1', '0500000000', 'student1@example.com', 'e3547f56-02e5-11e9-967e-9c5c8ec2ccdf-8e85ddd8643faa65e2b97c5d2503c5fe-500903716612870b1ed985716d66457a-96054aa2f1bbd160f7c9d03c806808c7.png'),
+(71, 'student2', '0500000001', 'student2@example.com', '2dd3ffb1-02e6-11e9-967e-9c5c8ec2ccdf-e621345e4f04e4951474ba671943c62b.png'),
+(72, 'student3', '0500000002', 'student3@example.com', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf-850bf10077fbefd44fbcd58dc62dfaf7-29f9f2e7583564e62f1b6080f15c2f9e.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -185,19 +182,19 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Constraints for dumped tables
