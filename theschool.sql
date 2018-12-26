@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2018 at 04:25 PM
+-- Generation Time: Dec 26, 2018 at 04:40 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -44,8 +44,8 @@ CREATE TABLE `administrator` (
 
 INSERT INTO `administrator` (`admin_id`, `admin_name`, `admin_role`, `admin_phone`, `admin_email`, `admin_image`, `admin_password`) VALUES
 (1, 'Ariel Nykänen ', 1, '544444444', 'example1@any.any', 'f0799852-02af-11e9-967e-9c5c8ec2ccdf.jpg', 'a01610228fe998f515a72dd730294d87'),
-(40, 'David Goldman', 2, '0544444444', 'example2@any.any', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf-9443efa5130a8f5ca07ef3f5f0b9a830-da70d9d6dbd16cb4b8714360b20c514a.jpeg', 'a01610228fe998f515a72dd730294d87'),
-(41, 'sales man', 3, '0577777777', 'example3@any.any', 'e978b247-0679-11e9-967e-9c5c8ec2ccdf-771761aac41f072ae9c80cc0542ef9ab.png', '1212');
+(45, 'David Goldman', 2, '0500000000', 'example2@any.any', '5cbac4e7-02b0-11e9-967e-9c5c8ec2ccdf-6a24a1e8eb5d481209a4a560dd555772-dfeafda751e78f0d135d5966cfb232ed.jpeg', 'a01610228fe998f515a72dd730294d87'),
+(46, 'sales man', 3, '0577777777', 'example3@any.any', 'e978b247-0679-11e9-967e-9c5c8ec2ccdf-6d5e3844e1697cc98735fbdf25818547.png', 'a01610228fe998f515a72dd730294d87');
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE `courses` (
 INSERT INTO `courses` (`course_id`, `course_name`, `course_description`, `course_image`, `course_max_students`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Github', '              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, esse exercitationem itaque fugit laborum consequuntur repellendus architecto dolores officia deleniti suscipit eligendi eos odit maxime ab natus libero mollitia tempora?              ', 'f67bd295-02ae-11e9-967e-9c5c8ec2ccdf-2914fd7341fc6c434cbfaad7e64d6395.jpeg', 30, '2018-11-28 22:00:00', '2018-11-05 22:00:00', NULL),
 (2, 'Angular pro', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'c58715ad-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
-(3, 'Amazon', '  Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!  ', 'ec72ece4-02e8-11e9-967e-9c5c8ec2ccdf.png', 2, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
+(3, 'Amazon', '    Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!    ', 'ec72ece4-02e8-11e9-967e-9c5c8ec2ccdf.png', 4, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
 (4, 'Ebay', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci itaque commodi odit labore facilis alias debitis, explicabo natus dolore sed neque, deserunt quae doloribus dolorum. Cupiditate dolor quo facere sequi!', 'ec72f9d0-02e8-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-11-28 22:00:00', '2018-11-28 22:00:00', NULL),
 (5, 'node', 'Learn node js...', 'ac9d4735-02e7-11e9-967e-9c5c8ec2ccdf.png', 30, '2018-12-17 22:00:00', NULL, NULL);
 
@@ -111,8 +111,13 @@ CREATE TABLE `sc-connector` (
 --
 
 INSERT INTO `sc-connector` (`student_id`, `course_id`) VALUES
+(70, 2),
 (70, 3),
-(71, 3);
+(71, 3),
+(72, 2),
+(72, 3),
+(72, 4),
+(72, 5);
 
 -- --------------------------------------------------------
 
@@ -182,13 +187,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `students`
