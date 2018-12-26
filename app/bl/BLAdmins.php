@@ -81,12 +81,12 @@ class BLAdmins extends BusinessLogic {
       $this->dal->update($query, $params);
   }
 
-  public function delete($id)
+  public function delete($adminId)
   {
-      $query = "DELETE FROM `users` WHERE `users_id` = :ui";
+      $query = "DELETE FROM `administrator` WHERE `admin_id` = :ai";
 
       $params = array(
-          "ui" => $id
+          "ai" => $adminId
       );
 
       $this->dal->delete($query, $params);

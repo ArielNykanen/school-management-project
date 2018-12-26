@@ -1,5 +1,10 @@
 <?php
 
+if (isset($_POST['delete-admin'])) {
+  $adminId = $_POST['delete-admin'];
+  AdminController::deleteAdmin($adminId);
+}
+
 if (
 isset($_POST['add-admin']) &&
 isset($_POST['admin-name']) &&
@@ -46,7 +51,7 @@ if (
   
   
     if(AdminController::validateForm($adminDetails, $adminDetails['admin_id'])) {
-      // AdminController::uploadAdmin($adminDetails);
+      AdminController::uploadAdmin($adminDetails);
     }
   
   }

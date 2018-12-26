@@ -1,4 +1,8 @@
 
+
+
+
+ 
   <form action="" method="POST" enctype="multipart/form-data">
 <div class="col-md-12 col-lg-3 order-1 order-lg-3"> 
     <div class="card border-default mb-3 bg-card text-center" style="width: 30rem;">
@@ -24,35 +28,46 @@
     <input name='admin-email' class="text-dark form-control" value="<?php echo $editAdmin->admin_email; ?>">
     <label>Password</label>
     <input name='admin-password' class="text-dark form-control" placeholder='re-enter password to save'>
-    <?php 
-    if ($loggedAdmin[0]->admin_role > 1) {
-    ?>
+   
     <label>Change Role</label>
     <select class='form-control' name="admin-role[]" id="">
     <?php
-
-    $rbl = new BLRoles();
+  
+    $rbl = new BLRoles(); 
     $allRoles = $rbl->get();
     foreach ($allRoles as $key => $role) {
-      if ($loggedAdmin[0]->admin_role < 2 && $role->role_id < 2) {
+      if ($editAdmin->admin_role > 1 && $role->role_id > 1 && $loggedAdmin[0]->admin_role === 1) {
     ?>
     <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
     <?php
-      } else if ($role->role_id > 1){
+      } else if ($editAdmin->admin_role >= 2 && $role->role_id === 2) {
+    ?>
+        <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
+    <?php
+      } else if ($editAdmin->admin_role > 2 && $role->role_id >= 2) {
         ?>
-      <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
+        <option value="<?php echo $role->role_id ?>"><?php echo $role->role_level ?></option>
         <?php
       }
-      }
-    ?>
-    </select>
-    <?php
     }
     ?>
+    </select>
+
   </div>
   <div class="card-footer bg-dark border-default">
   <div class="mr-2 text-center">
   <button name='save-edit' value='<?php echo $editAdmin->admin_id ?>' class='btn btn-lg btn-primary'>Save Changes</button>
+  <?php
+  if ($loggedAdmin[0]->admin_role > 1 && $editAdmin->admin_role !== 2) {
+    ?>
+  <button name='delete-admin' value='<?php echo $editAdmin->admin_id ?>' class='btn btn-lg btn-danger ml-4'>Delete Admin</button>
+  <?php
+  } else if ($loggedAdmin[0]->admin_role === 1) {
+    ?>
+    <button name='delete-admin' value='<?php echo $editAdmin->admin_id ?>' class='btn btn-lg btn-danger ml-4'>Delete Admin</button>
+  <?php
+  }
+  ?>
   </div>
   </div>
 </div>

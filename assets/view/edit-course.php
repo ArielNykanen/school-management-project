@@ -3,7 +3,7 @@
 <div class="col-12">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 <?php 
-if ($loggedAdmin[0]->admin_role < 2) {
+if ($loggedAdmin[0]->admin_role <= 2) {
 ?>
   <li class="nav-item">
     <a class="nav-link" id="edit-details-tab" data-toggle="tab" href="#edit-details" role="tab" aria-controls="edit-details" aria-selected="true">Edit Details</a>
@@ -25,7 +25,7 @@ if ($loggedAdmin[0]->admin_role < 2) {
 <div class="tab-content col-12" id="myTabContent">
 
 <?php 
-if ($loggedAdmin[0]->admin_role < 2) {
+if ($loggedAdmin[0]->admin_role <= 2) {
 ?>
   <!-- Course Details tab -->
   <div class="tab-pane fade text-center tabs-style" id="edit-details" role="tabpanel" aria-labelledby="home-tab">

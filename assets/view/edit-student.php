@@ -28,7 +28,7 @@
   <!-- personal settings tab -->
   <div class="tab-pane fade tabs-style " id="add-courses" role="tabpanel" aria-labelledby="home-tab">
     <h1 class='m-0'>Add Courses</h1>
-  <table class="table d-block-md d-sm-none">
+  <table class="table d-none d-md-block">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Course</th>
@@ -122,6 +122,24 @@ if (!empty($notEnrolledCourses)) {
 <?php
 }
 ?>
+
+<ul class="list-group d-block d-md-none">
+<?php
+foreach ($notEnrolledCourses as $course) {
+      if (CourseController::getLeftPlaces($course->course_id)  > 0) {
+      ?>
+      <li class="list-group-item text-dark">
+      <?php echo $course->course_name ?>
+      <img src="..\uploads\courses\courses-cover-images\<?php echo $course->course_image ?>" style='max-width:60px; max-height:50px' alt="">
+      <span><?php echo  strlen($course->course_description) > 30 ? substr($course->course_description, 0, 30) . '...' : $course->course_description ?></span>
+      <input type="checkbox" class='form' value='<?php echo $course->course_id ?>' name="courses[]">
+      </li>
+      <?php
+      }
+      }
+      ?>
+</ul>
+
 </div>
 
   <div class="tab-pane fade tabs-style show active in" id="personal-settings" role="tabpanel" aria-labelledby="home-tab">
@@ -184,7 +202,7 @@ if (!empty($notEnrolledCourses)) {
   </div>
  
   </div>
-  <table class="table">
+  <table class="tabletable d-none d-md-block">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Course</th>
@@ -221,10 +239,27 @@ if (!empty($studentInfo->getCourseModelArray())) {
 ?>
 <div align=right>
   <button name='remove-courses' value='<?php echo $studentInfo->student_id ?>' class='btn btn-lg btn-danger'>Remove Selected</button>
-  </div>
+</div>
   <?php
 }
 ?>
+
+<ul class="list-group d-block d-md-none">
+<?php
+foreach ($studentEnrolled as $course) {
+      if (CourseController::getLeftPlaces($course->course_id)  > 0) {
+      ?>
+      <li class="list-group-item text-dark">
+      <?php echo $course->course_name ?>
+      <img src="..\uploads\courses\courses-cover-images\<?php echo $course->course_image ?>" style='max-width:60px; max-height:50px' alt="">
+      <input class='ml-auto' type="checkbox" name="removed-courses[]" value='<?php echo $course->course_id ?>'>
+      </li>
+      <?php
+      }
+      }
+      ?>
+</ul>
+
   </div>
 
   <!-- Delete Student tab -->

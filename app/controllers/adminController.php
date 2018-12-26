@@ -176,15 +176,19 @@ return true;
   }
 
 
-  public static function deleteStudent($adminId) {
+  public static function deleteAdmin($adminId) {
     $abl = new BLAdmins();
-    $deletedStudent = $abl->getOne($adminId);
-    $deletedStudentImage = "../uploads/profiles/images/students/".$deletedStudent->student_image;
-    if (unlink($deletedStudentImage)) {
-      $abl->delete($adminId);
+    $deletedAdmin = $abl->getOne($adminId);
+    if ($deletedAdmin->admin_image !== 'defaultStudent.png') {
+      $deletedAdminImage = "../uploads/profiles/images/admins/" . $deletedAdmin->adminRole()->role_level . '/' . $deletedAdmin->admin_image;
+      if (unlink($deletedAdminImage)) {
+        $abl->delete($adminId);
       } else {
-      return AlertService::createAlert('Something went wrong try again', '', 'danger');
+        $abl->delete($adminId);
       }
+    } else {
+      $abl->delete($adminId);
+    }
   }
 
 
